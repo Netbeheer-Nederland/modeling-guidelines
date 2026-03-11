@@ -1,0 +1,8 @@
+* xref::background.adoc[]
+* Patterns
+** xref::topology.adoc[]
+** xref::congestion.adoc[]
+** xref::boundary_point.adoc[]
+** xref::location.adoc[]
+** xref::assets_work.adoc[]
+** xref::busbarconfiguration.adoc[]
