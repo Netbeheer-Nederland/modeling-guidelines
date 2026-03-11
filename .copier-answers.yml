@@ -1,0 +1,8 @@
+# Changes here will be overwritten by Copier
+_commit: '0.1'
+_src_path: gh:Netbeheer-Nederland/template-doc
+description: Describes the grid modeling approach and details the grid model data
+    requirements for data supplied by Dutch transmission and distribution system operators.
+git_protocol: SSH
+name: modeling-guidelines
+title: Modeling Guidelines
