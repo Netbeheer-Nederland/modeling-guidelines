@@ -3,14 +3,13 @@
 :description: This document describes the modeling guidelines for the NBNL Profile Group.
 :url-repo: https://github.com/Netbeheer-Nederland/modeling-guidelines
 :domain: https://modellen.netbeheernederland.nl
-:version: {page-component-display-version}
 :uri: {domain}/modeling-guidelines
 
 Author:: mailto:ritger.teunissen@alliander.com[Ritger Teunissen] (Alliander)
 //Editors::
 //mailto:ritger.teunissen@alliander.com[Ritger Teunissen] (Alliander) +
 //mailto:robbert.hardin@alliander.com[Robbert Hardin] (Alliander)
-Version:: {version}
+Version:: {page-component-display-version}
 Feedback::
 https://github.com/Netbeheer-Nederland/modeling-guidelines/issues[Issue on GitHub] (https://github.com/Netbeheer-Nederland/modeling-guidelines[`Netbeheer-Nederland/modeling-guidelines`])
 
