@@ -10,7 +10,7 @@
 :url-repo: https://github.com/Netbeheer-Nederland/doc-modeling-guidelines
 :domain: modellen.netbeheernederland.nl
 :uri: https://{domain}/modeling-guidelines/points
-:version: v0.1 concept
+:version: {page-component-display-version}
 
 Author:: mailto:robbert.hardin@alliander.com[Robbert Hardin] (Alliander)
 //Editors::
