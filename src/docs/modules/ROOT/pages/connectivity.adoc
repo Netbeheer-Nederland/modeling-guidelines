@@ -25,8 +25,18 @@ https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on G
 ---
 
 == Introduction
-This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the following terms; *ConductingEquipment, ConnectivityNode, Terminal, TopoologicalNode.*
 
+Substations are the humming hearts of the electrical grid, an interconnected network for electricity delivery from power producers to consumers. Electrical grids consist of power plants, electrical substations to step voltage up or down, electric power transmission to carry power over long distances, and finally electric power distribution to customers. 
+
+image::Electricity_grid_simple-_North_America.svg[]
+
+https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Diagram of an electrical grid (generation system in red, transmission system in blue, distribution system in green)]
+
+But what does a substation look like. And how do you model a substation?
+
+A substation step voltage up or down. To do so it uses transformers:
+
+{image of a transformer} {single line diagram of a transformer} {CIM-representation of a transformer}
 
 
 
