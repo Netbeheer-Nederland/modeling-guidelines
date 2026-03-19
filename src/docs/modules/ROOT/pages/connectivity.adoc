@@ -26,20 +26,16 @@ https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on G
 
 == Introduction
 
-Substations are the humming hearts of the electrical grid, an interconnected network for electricity delivery from power producers to consumers. Electrical grids consist of power plants, electrical substations to step voltage up or down, electric power transmission to carry power over long distances, and finally electric power distribution to customers. 
+The electrical grid is an interconnected network for electricity delivery from power producers to consumers. It consists of *power plants*, *electric power transmission* to carry power over long distances, *electric power distribution* to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. As such they are the humming hearts of the electrical grid.
 
 image::Electricity_grid_simple-_North_America.svg[]
 
 https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Diagram of an electrical grid (generation system in red, transmission system in blue, distribution system in green)]
 
-But what does a substation look like. And how do you model a substation?
+A substation uses transformers to step voltage up or down. This is a picture of a transformer. It is a <trafo xyz of type abc> with serial number 123. This is very useful information when you are a purchaser and you need to purchase a replacement transformer. But as a net engineer you might be interested in its function: stepping voltage up or down. This is (in short) the difference between asset perspective and funtional perspective. More on this in a later part.
 
-A substation step voltage up or down. To do so it uses transformers:
 
 {image of a transformer} {single line diagram of a transformer} {CIM-representation of a transformer}
-
-
-
 
 ---
 
