@@ -18,26 +18,8 @@ The **busbar section** is a conductor, or group of conductors, with negligible i
 In CIM, a **busbar section** is modelled with a {tc57}/BusbarSection.html[cim:BusbarSection] object associated via its
 {tc57}/Terminal.html[cim:Terminal] to a {tc57}/ConnectivityNode.html[cim:ConnectivityNode] object.
 
-voorbeeld 1
-
 .Busbar Section
-[d2,svg,link=self]
---
-...@../partials/diagrams/bbs.d2
---
-
-voorbeeld 2
-
-[d2,svg,link=self]
---
-include::../partials/diagrams/bbs_vb2.d2[]
---
-
-voorbeeld 3
-
-include::partial$bbs.adoc[]
-
-
+include::partial$bbs.d2.adoc[]
 
 == Modelling choices
 In cim the {tc57}/ConnectivityNode.html[cim:ConnectivityNode] objects are the means by which connectivity [see connectivity.adoc] is described and a typical grid model has many cim:ConnectivityNode  objects that *do not* represent busbars. Only Connectivity Nodes that have the {tc57}/Terminal.html[cim:Terminal] of a {tc57}/BusbarSection.html[cim:BusbarSection] associated with them are representing a cim:BusBarSection.
