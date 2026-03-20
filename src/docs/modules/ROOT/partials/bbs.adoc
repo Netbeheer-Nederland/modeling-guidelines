@@ -1,0 +1,15 @@
+[d2,svg]
+----
+...@../partials/diagrams/cim_legend.d2
+
+direction: down
+
+BusbarSection.class: grid
+Terminal.class: grid
+ConnectivityNode.class: grid
+
+
+BusbarSection -- Terminal
+Terminal -- ConnectivityNode
+----
+
