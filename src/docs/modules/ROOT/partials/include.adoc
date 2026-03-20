@@ -15,4 +15,4 @@
 :url-repo: {github}/doc-modeling-guidelines
 :feedback: {url-repo}/issues[Issue on GitHub]
 
-:tc57: https://netbeheer-nederland.github.io/docs/im-tc57cim/latest/schema/class
+:tc57: https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class
