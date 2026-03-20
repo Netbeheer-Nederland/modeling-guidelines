@@ -24,6 +24,6 @@ include::partial$bbs.d2.adoc[]
 == Modelling choices
 In cim the {tc57}/ConnectivityNode.html[cim:ConnectivityNode] objects are the means by which connectivity [see connectivity.adoc] is described and a typical grid model has many cim:ConnectivityNode  objects that *do not* represent busbars. Only Connectivity Nodes that have the {tc57}/Terminal.html[cim:Terminal] of a {tc57}/BusbarSection.html[cim:BusbarSection] associated with them are representing a cim:BusBarSection.
 
-A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see {domain}/{doc}/busbarconfiguration.adoc[BusBar Configuration]
+A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see xref::busbarconfiguration.adoc[BusBar Configuration].
 
-Voltage measurements are typically obtained from voltage transformers that are connected to busbar sections, see also : {domain}/{doc}/measurements.adoc[Measurements].
+Voltage measurements are typically obtained from voltage transformers that are connected to busbar sections, see also xref::measurements.adoc[Measurements].

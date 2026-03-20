@@ -2,4 +2,4 @@
 description:: {description}
 version:: {page-component-display-version}
 author:: {author}, {email}
-feedback:: {feedback} ({url-repo}[`Netbeheer-Nederland/doc-modeling-guidelines`])
+feedback:: {feedback} ({url-repo}[`Netbeheer-Nederland/modeling-guidelines`])
