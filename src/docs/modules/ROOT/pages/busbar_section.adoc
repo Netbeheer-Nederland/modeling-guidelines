@@ -1,0 +1,34 @@
+= BusbarSection
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**
+
+These terms are used within the energy industry, particularly in standards like the IEC Common Information Model (CIM).
+
+A **busbar section** is a metallic strip or bar, typically housed in and part of enclosures (in substations) for the distribution of high current power.
+
+== CIM definition
+The **busbar section** is a conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation. The **busbar section** may have many physical terminals but in CIM the busbar section is modelled with exactly one logical terminal.
+
+== Core entities
+In CIM, a **busbar section** is modelled with a {tc57}/BusbarSection.html[cim:BusbarSection] object associated via its
+{tc57}/Terminal.html[cim:Terminal] to a {tc57}/ConnectivityNode.html[cim:ConnectivityNode] object.
+
+
+.Busbar Section
+[d2,svg,link=self]
+----
+...@../partials/diagrams/bbs.d2
+----
+
+
+== Modelling choices
+In cim the {tc57}/ConnectivityNode.html[cim:ConnectivityNode] objects are the means by which connectivity [see connectivity.adoc] is described and a typical grid model has many cim:ConnectivityNode  objects that *do not* represent busbars. Only Connectivity Nodes that have the {tc57}/Terminal.html[cim:Terminal] of a {tc57}/BusbarSection.html[cim:BusbarSection] associated with them are representing a cim:BusBarSection.
+
+A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see {domain}/{doc}/busbarconfiguration.adoc[BusBar Configuration]
+
+Voltage measurements are typically obtained from voltage transformers that are connected to busbar sections, see also : {domain}/{doc}/measurements.adoc[Measurements].
