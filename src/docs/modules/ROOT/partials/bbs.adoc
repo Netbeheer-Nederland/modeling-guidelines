@@ -1,6 +1,6 @@
 [d2,svg]
 ----
-include::partial$diagrams/cim_legend.d2
+include::partial$diagrams/cim_legend.d2[]
 
 direction: down
 
