@@ -5,13 +5,21 @@ include::partial$include.adoc[]
 include::partial$header.adoc[]
 
 == Introduction
-This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**.
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
 
-These terms are used within the energy industry, particularly in standards like the IEC Common Information Model (CIM).
+Dutch translation of Busbar Section is Rail
 
-A **busbar section** is a metallic strip or bar, typically housed in and part of enclosures (in substations) for the distribution of high current power.
+A **busbar section** is in most cases a metallic strip or bar, typically housed in and part of enclosures (in substations) for the distribution of high current power.
+However, they can also be used based on flexible or rigid busbars to connect high-voltage equipment in electrical switchyards.
 
-== CIM definition
+.Distribution Busbar - https://en.wikipedia.org/wiki/Busbar#/media/File:Busbars.jpg[wikipedia]
+image::image-2026-03-23-11-25-33-806.png[alt="Distribution Busbar"]
+
+.Flexible Busbar - https://en.wikipedia.org/wiki/Busbar#/media/File:Busbars.jpg[wikipedia]
+image::image-2026-03-23-12-06-40-874.png[alt="Flexible Busbar"]
+
+== Definition
 The **busbar section** is a conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation. The **busbar section** may have many physical terminals but in CIM the busbar section is modelled with exactly one logical terminal.
 
 == Core entities
@@ -22,7 +30,7 @@ In CIM, a **busbar section** is modelled with a {tc57}/BusbarSection.html[cim:Bu
 include::partial$bbs.d2.adoc[]
 
 == Modelling choices
-In cim the {tc57}/ConnectivityNode.html[cim:ConnectivityNode] objects are the means by which connectivity [see connectivity.adoc] is described and a typical grid model has many cim:ConnectivityNode  objects that *do not* represent busbars. Only Connectivity Nodes that have the {tc57}/Terminal.html[cim:Terminal] of a {tc57}/BusbarSection.html[cim:BusbarSection] associated with them are representing a cim:BusBarSection.
+In cim the ConnectivityNode objects are the means by which connectivity (see xref::connectivity.adoc[connectivity]) is described and a typical grid model has many ConnectivityNode objects that *do not* represent busbars. Only Connectivity Nodes that have the Terminal of a BusbarSection associated with them are representing a {tc57}/BusbarSection.html[cim:BusbarSection].
 
 A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see xref::busbarconfiguration.adoc[BusBar Configuration].
 

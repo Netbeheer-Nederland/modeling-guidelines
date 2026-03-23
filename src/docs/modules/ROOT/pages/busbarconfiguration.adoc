@@ -1,31 +1,18 @@
 = BusbarConfigurations
 
-:doctype: article
-:encoding: utf-8
-:lang: en
-:toc: right
-:numbered!:
-:figure-caption!:
-:description: This document describes the BusbarConfigurations as part of the modeling guidelines for the NBNL Profile Group.
-:url-repo: https://github.com/Netbeheer-Nederland/doc-modeling-guidelines
-:domain: modellen.netbeheernederland.nl
-:uri: https://{domain}/modeling-guidelines/busbarconfiguration
-:version: v0.9 concept
-
-Author:: mailto:ahagreis@netbeheernederland.nl[Arend Hagreis]
-//Editors::
-
-Version:: {version}
-Feedback:: https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on GitHub] (https://github.com/Netbeheer-Nederland/doc-modeling-guidelines[`Netbeheer-Nederland/doc-modeling-guidelines`])
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
 
 == Introduction
 This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the *Busbar Configuration*
 
-These terms are used within the energy industry, particularly in standards like the IEC Common Information Model (CIM) and profiles like the European Style Market Profile (ESMP).
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)] and profiles like the European Style Market Profile (ESMP).
 
 == BusbarConfiguration
 
-The *BusbarConfiguration* defines the possible layouts for the usage of busbars in a VoltageLevel but because this can differ per Bay, the enumeration (see below) is at the Bay level. .
+The {tc57}/BusbarConfiguration.html[*cim:BusbarConfiguration*] defines the possible layouts for the usage of busbars in a VoltageLevel but because this can differ per Bay, the enumeration (see below) is at the Bay level. .
 
 It is an enumeration type with values like: 
 
@@ -33,7 +20,6 @@ It is an enumeration type with values like:
 * mainWithTransfer
 * ringBus
 * singleBus
-
 
 == Description of the different configurations:
 
