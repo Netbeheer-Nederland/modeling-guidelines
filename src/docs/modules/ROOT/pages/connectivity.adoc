@@ -39,6 +39,25 @@ A substation uses transformers to step voltage up or down. This is a picture of 
 
 There are various ways to model a transformer. There is no right or wrong, there is only _useful_ or _not useful_. The same holds for modeling the electrical grid. You can explicitly name every part (asset) of a (power)transformer: https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/VoltageLevel.html[VoltageLevel], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Substation.html[Substation], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformer.html[PowerTransformer], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformerEnd.html[PowerTransformerEnd], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/TopologicalNode.html[TopologicalNode], ... When you have a use case, e.g. power consumption of power consumers connected to a specific substation, you have a criterion for what assets are useful to name. This is (in short) the difference between connectivity (naming everything) and topology (naming only useful assets based on a use case). More on this in a later part.
 
+This document explains how to model the electrical grid using https://modellen.netbeheernederland.nl/tc57cim/cim17/index.html[CIM]. It also explains the difference between _asset_ and _functional perspective_ and the difference between _connectivity_ and _topology_.
+
+== Conducting Equipment, Terminals and Connectivity Nodes
+
+In https://modellen.netbeheernederland.nl/tc57cim/cim17/index.html[CIM] https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConductingEquipment.html[ConductingEquipment]s are `parts of the AC power system that are designed to carry current or that are conductively connected through terminals.` A https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal] is an `AC electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection points called connectivity nodes.` Finally, https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode]s are `points where terminals of AC conducting equipment are connected together with zero impedance.`
+
+You can picture them as a kettlebell on an extension cord. The cast-iron ball-shaped body of the kettlebell is the ConductingEquipment. The round handle attached to it is a ConnectivityNode. And the extension cord is a terminal. The only thing is, there can be multiple handles.
+
+{D2-image of (CE)--has--(T)--is connecting by--(CN)} or simplified: 
+{D2-image of (CE)--(T)--(CN)}
+
+With these definitions we will model the electrical grid.
+
+== https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws[Kirchhoff's circuit law] and your electricity bill
+
+Conducting (short distance) without power loss, hence no electricity bill.
+Conducting with power loss (power consumption), hence electricity bill.
+Linking both with Kirchhoff's law. Tie to connectivity vs topology.
+
 ---
 
 This document includes text from the https://www.ofgem.gov.uk/decision/long-term-development-statement-direction[LTDS Grid Modelling Guidelines], published under the http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/[Open Government License]
