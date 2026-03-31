@@ -32,10 +32,12 @@ image::Electricity_grid_simple-_North_America.svg[]
 
 https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Diagram of an electrical grid (generation system in red, transmission system in blue, distribution system in green)]
 
-A substation uses transformers to step voltage up or down. This is a picture of a transformer. It is a <trafo xyz of type abc> with serial number 123. This is very useful information when you are a purchaser and you need to purchase a replacement transformer. But as a net engineer you might be interested in its function: stepping voltage up or down. This is (in short) the difference between asset perspective and funtional perspective. More on this in a later part.
+A substation uses transformers to step voltage up or down. This is a picture of a transformer. It is a <trafo xyz of type abc> with serial number 123. This is very useful information when you are a purchaser and you need to purchase a replacement transformer. But as a net engineer you might be interested in its function: stepping voltage up or down. This is (in short) the difference between asset perspective and functional perspective. More on this in a later part.
 
 
 {image of a transformer} {single line diagram of a transformer} {CIM-representation of a transformer}
+
+There are various ways to model a transformer. There is no right or wrong, there is only _useful_ or _not useful_. The same holds for modeling the electrical grid. You can explicitly name every part (asset) of a (power)transformer: https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/VoltageLevel.html[VoltageLevel], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Substation.html[Substation], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformer.html[PowerTransformer], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformerEnd.html[PowerTransformerEnd], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode], https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/TopologicalNode.html[TopologicalNode], ... When you have a use case, e.g. power consumption of power consumers connected to a specific substation, you have a criterion for what assets are useful to name. This is (in short) the difference between connectivity (naming everything) and topology (naming only useful assets based on a use case). More on this in a later part.
 
 ---
 
