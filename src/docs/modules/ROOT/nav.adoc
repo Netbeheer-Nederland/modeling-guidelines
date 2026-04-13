@@ -5,5 +5,5 @@
 ** xref::boundary_point.adoc[]
 ** xref::location.adoc[]
 ** xref::assets_work.adoc[]
-** xref::busbar_section.adoc[]
+** xref::busbarsection.adoc[]
 ** xref::busbarconfiguration.adoc[]

@@ -26,12 +26,12 @@ The **busbar section** is a conductor, or group of conductors, with negligible i
 In CIM, a **busbar section** is modelled with a {tc57}/BusbarSection.html[cim:BusbarSection] object associated via its
 {tc57}/Terminal.html[cim:Terminal] to a {tc57}/ConnectivityNode.html[cim:ConnectivityNode] object.
 
-.Busbar Section
+.cim:BusbarSection
 include::partial$bbs.d2.adoc[]
 
 == Modelling choices
-In cim the ConnectivityNode objects are the means by which connectivity (see xref::connectivity.adoc[connectivity]) is described and a typical grid model has many ConnectivityNode objects that *do not* represent busbars. Only Connectivity Nodes that have the Terminal of a BusbarSection associated with them are representing a {tc57}/BusbarSection.html[cim:BusbarSection].
+In cim the ConnectivityNode objects are the means by which connectivity (see xref::connectivity.adoc[Connectivity]) is described and a typical grid model has many ConnectivityNode objects that *do not* represent busbars. Only Connectivity Nodes that have the Terminal of a BusbarSection associated with them are representing a {tc57}/BusbarSection.html[cim:BusbarSection].
 
-A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see xref::busbarconfiguration.adoc[BusBar Configuration].
+A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see xref::busbarconfiguration.adoc[BusbarConfiguration].
 
 Voltage measurements are typically obtained from voltage transformers that are connected to busbar sections, see also xref::measurements.adoc[Measurements].
