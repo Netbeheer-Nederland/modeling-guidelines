@@ -44,11 +44,15 @@ Besides a *step down* PowerTransformer, there is the aforementioned *step up* Po
 
 include::partial$connectivity/PowerTransformer.d2[]
 
-
 == Connecting Substations
-Substations are connected by physical cables with https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Joint.html[Joints],  https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Switch.html[Switch]es and other https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConductingEquipment.html[ConductingEquipment].
 
-Connecting Substations using ConnectiryNodes, Terminals and TopoligcalNodes. Explaining these are abstractions and they can only exist because of Kirchhoff's Law. 
+Suppose you have two step down power transformers, a 150kV/10kV stepping down from 150kV to 10kV and a 10kV/0.4kV. You can model the connection by naming all physical components. That might be useful for an asset manager who has to perform maintenance on them. But when you are an electrical engineer who needs a model to perform grid calculations, this is not useful. You just want to draw a line from one 10kV PowerTransformerEnd to the other 10kV PowerTransformerEnd and you want to make sure there is no change in voltage on  this line. In CIM you connect each PowerTransformerEnd to an abstract, non physical, https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode] with zero impedance. Next you connect them using a https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal]:
+
+(PTE)--(CN)--(T)--(CN)--(PTE)
+
+Because a ConnectivityNode has zero impedance it follows from Kirchhoff's law the connection in Terminal is 10kV.
+
+---
 
 TSO/DSO so you need SubGeographicalRegion
 
