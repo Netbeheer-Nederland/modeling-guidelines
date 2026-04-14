@@ -1,0 +1,14 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: down
+
+CoordinateSystem.class: enterprise
+location.class: enterprise
+PositionPoint.class: enterprise
+
+location -- CoordinateSystem
+location -- PositionPoint
+----
+
