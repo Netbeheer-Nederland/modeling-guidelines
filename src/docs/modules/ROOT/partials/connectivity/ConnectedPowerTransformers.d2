@@ -1,0 +1,116 @@
+.CIM:ConnectedPowerTransformers
+[d2,svg,theme=4]
+----
+
+vars: {
+  d2-config: {
+    pad: 20
+  }
+}
+
+legend: "" {
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  grid-rows: 3
+  grid-columns: 2
+  grid-gap: 10
+  near: bottom-right
+  iec61968_color: "" {
+    style: {
+      fill: "#d1e7c2"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61968_text: "IEC61968 (Enterprise)" {
+    shape: text
+  }
+  iec61970_color: "" {
+    style: {
+      fill: "#eccfcb"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec61970_text: "IEC61970 (Grid)" {
+    shape: text
+  }
+  iec62325_color: "" {
+    style: {
+      fill: "#fffbef"
+      stroke: black
+      stroke-width: 1
+    }
+    width: 10
+    height: 10
+  }
+  iec62325_text: "IEC62325 (Market)" {
+    shape: text
+  }
+}
+
+classes: {
+  grid: {
+    style: {
+      fill: "#eccfcb"
+      shadow: true
+    }
+  }
+  enterprise: {
+    style: {
+      fill: "#d1e7c2"
+      shadow: true
+    }
+  }
+  market: {
+    style: {
+      fill: "#fffbef"
+      shadow: true
+    }
+  }
+  empty: {
+    label: ""
+    style: {
+      fill: transparent
+      stroke-width: 0
+    }
+  }
+}
+
+grid-rows: 3
+grid-columns: 5
+
+vertical-gap: 80
+horizontal-gap: 160
+
+SS1: "SubStation" {class: [grid]}
+PT1: "PowerTransformer" {class: [grid]}
+PTE1: "PowerTransformerEnd" {class: [grid]}
+BV1: "BaseVoltage" {class: [grid]}
+VL1: "VoltageLevel" {class: [grid]}
+
+CN2: "ConnectivityNode" {class: [grid]}
+2_2: {class: [empty]}
+T: "Terminal" {class: [grid]}
+2_4: {class: [empty]}
+CN1: "ConnectivityNode" {class: [grid]}
+
+VL2: "VoltageLevel" {class: [grid]}
+BV2: "BaseVoltage" {class: [grid]}
+PTE2: "PowerTransformerEnd" {class: [grid]}
+PT2: "PowerTransformer" {class: [grid]}
+SS2: "SubStation" {class: [grid]}
+
+SS1 -- PT1 -- PTE1 -- BV1 -- VL1
+VL1 -- CN1
+CN2 -- T -- CN1
+CN2 -- VL2
+VL2 -- BV2 -- PTE2 -- PT2 -- SS2
+
+----

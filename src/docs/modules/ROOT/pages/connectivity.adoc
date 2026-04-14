@@ -46,15 +46,13 @@ include::partial$connectivity/PowerTransformer.d2[]
 
 == Connecting Substations
 
-Suppose you have two step down power transformers, a 150kV/10kV stepping down from 150kV to 10kV and a 10kV/0.4kV. You can model the connection by naming all physical components. That might be useful for an asset manager who has to perform maintenance on them. But when you are an electrical engineer who needs a model to perform grid calculations, this is not useful. You just want to draw a line from one 10kV PowerTransformerEnd to the other 10kV PowerTransformerEnd and you want to make sure there is no change in voltage on  this line. In CIM you connect each PowerTransformerEnd to an abstract, non physical, https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode] with zero impedance. Next you connect them using a https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal]:
+Suppose you have two step down power transformers, a 150kV/10kV stepping down from 150kV to 10kV and a 10kV/0.4kV. You can model their connection by naming all physical components. That might be useful for an asset manager who has to perform maintenance on them. But when you are an electrical engineer who needs a model to perform grid calculations, this is not useful. You just want to draw a line from one 10kV PowerTransformerEnd to the other 10kV PowerTransformerEnd and you want to make sure there is no change in voltage on  this line. In CIM you connect each PowerTransformerEnd to an abstract, non physical, https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode] with zero impedance. Next you connect them using a https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal]:
 
-(PTE)--(CN)--(T)--(CN)--(PTE)
 
-Because a ConnectivityNode has zero impedance it follows from Kirchhoff's law the connection in Terminal is 10kV.
+.ConnectedPowerTransformers
+include::partial$connectivity/ConnectedPowerTransformers.d2[]
 
----
-
-TSO/DSO so you need SubGeographicalRegion
+Because a ConnectivityNode has zero impedance it follows from https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws[Kirchhoff's circuit laws] the connection in Terminal is indeed 10kV.
 
 ---
 
