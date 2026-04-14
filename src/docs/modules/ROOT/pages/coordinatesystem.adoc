@@ -20,13 +20,14 @@ Key Functions:
 * Separation of Concerns: It decouples the physical asset (for example a Transformer) from its location, allowing the same asset to have multiple representations (one for a geographical map (https://modellen.netbeheernederland.nl/nbnl-geographical-location[GL Profile]) and one for a schematic diagram (SL profile)).
 
 == Definition
-The {tc57}/CoordinateSystem.html#crsUrn[cim:crsURN] (part of the {tc57}/CoordinateSystem.html[cim:CoordinateSystem]) is a Uniform Resource Name (URN) for the coordinate reference system (crs) used to define the {tc57}/PositionPoint.html[cim:PositionPoint] as part of the {tc57}/Location.html[cim:Location]
-
+The crsURN (part of the CoordinateSystem) is a Uniform Resource Name (URN) for the coordinate reference system (crs) used to define the PositionPoint as part of the Location
 
 An example would be the European Petroleum Survey Group (EPSG) code for a coordinate reference system, like the https://epsg.io/4326[EPSG 4326]
 
 
 == Core entities
+
+In CIM, the {tc57}/PositionPoint.html[cim:PositionPoint] containing the X,Y and Z coordinates is related to the {tc57}/Location.html[cim:Location] object. The {tc57}/CoordinateSystem.html[cim:CoordinateSystem]) describes the used coordinate reference system ({tc57}/CoordinateSystem.html#crsUrn[cim:crsURN]) for the PositionPoint coordinates. The CoordinateSystem is a separate object to allow for multiple PositionPoints to reference the same CoordinateSystem.
 
 .cim:Coordinate System (crs)
 include::partial$crs.d2.adoc[]
