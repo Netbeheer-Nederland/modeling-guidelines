@@ -16,7 +16,7 @@ Time Standard: Most European power markets operate in CET (UTC+1) or CEST (UTC+2
 
 == Definition
 Date and time as "yyyy-mm-ddThh:mm:ss.sss", which conforms with ISO 8601.
-UTC time zone is specified as "yyyy-mm-ddThh:mm:ss.sssZ". The second component (shown here as "ss.sss") could have any number of digits in its fractional part to allow any kind of precision beyond seconds.
+UTC time zone is specified as "yyyy-mm-ddThh:mm:ss.mmmZ". The second component (shown here as "ss.mmm") could have any number of digits in its fractional part to allow any kind of precision beyond seconds.
 
 == Modelling choices
 As best practise, it is highly recommended to store all date data in GMT/UTC and convert to CET/CEST only at the display or user-interface stage to avoid issues with daylight savings
@@ -39,22 +39,22 @@ Zulu time (UTC or GMT) is used in aviation, military, and international operatio
 === DateTime Structure (UTC+0)
 A fully qualified CIM Datetime string format is:
 
-    yyyymmddTHHMMSS.mmmmmmZ
+    yyyymmddThhmmss.mmmmmZ
 
 ** yyyy: Year
 ** mm: Month
 ** dd: Day
 ** T: Date-Time separator
-** HH: Hour (00-23)
-** MM: Minute
-** SS: Second
-** mmmmmm: Microseconds
-** Z (Zulu) = UTC+0
+** hh: Hour (00-23)
+** mm: Minute
+** ss: Second
+** mmmmm: Microseconds
+** Z: (Zulu) = UTC+0
 
 (The "T" divider is used to clearly separate the date from the time, ensuring unambiguous, machine-readable, and precise timestamping)
 
 === Example:
-*2023-10-10T07:00:00Z*
+*2023-10-10T07:00:00.000Z*
 
 
 
