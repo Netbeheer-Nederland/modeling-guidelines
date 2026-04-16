@@ -40,7 +40,7 @@ Object naming is intended for human consumption
 In CIM, relationships between objects are typically established using the Master Resource Identifier (mRID), as it provides a stable and unique identifier, while the name serves as a human-readable label that can be used for display purposes or to provide additional context about the object.
 
 === The mRID is based on a UUID and is unique and persistent.
-The mRID is unique within an exchange context, but preferably *Global uniqueness* should be achieved. This can be done by using a UUID, as specified in RFC 4122, for the mRID. The use of UUID is strongly recommended.
+The mRID is unique within an exchange context, but preferably *Global uniqueness* should be achieved. This can be done by using a UUID, as specified in https://interoperable-europe.ec.europa.eu/collection/ict-standards-procurement/solution/uuid-rfc-4122-universally-unique-identifier-uuid-urn-namespace[RFC 4122], for the mRID. The use of UUID is strongly recommended.
 
 The mRID is associated with the @id and the mRID attributes in Json-ld files.
 [source,json]
