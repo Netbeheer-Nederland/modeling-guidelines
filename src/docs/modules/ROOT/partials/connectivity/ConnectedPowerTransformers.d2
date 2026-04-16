@@ -96,9 +96,9 @@ BV1: "BaseVoltage" {class: [grid]}
 VL1: "VoltageLevel" {class: [grid]}
 
 CN2: "ConnectivityNode" {class: [grid]}
-2_2: {class: [empty]}
-T: "Terminal" {class: [grid]}
-2_4: {class: [empty]}
+T2: "Terminal" {class: [grid]}
+TN: "TopologicalNode" {class: [grid]}
+T1: "Terminal" {class: [grid]}
 CN1: "ConnectivityNode" {class: [grid]}
 
 VL2: "VoltageLevel" {class: [grid]}
@@ -109,7 +109,7 @@ SS2: "SubStation" {class: [grid]}
 
 SS1 -- PT1 -- PTE1 -- BV1 -- VL1
 VL1 -- CN1
-CN2 -- T -- CN1
+CN1 -- T1 -- TN -- T2 -- CN2
 CN2 -- VL2
 VL2 -- BV2 -- PTE2 -- PT2 -- SS2
 
