@@ -1,0 +1,49 @@
+= Metadata
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **  **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+== Definition
+Each dataset requires metadata to keep track of issuer, issuance date, schema
+and dependencies.
+
+== Core entities
+https://www.dublincore.org/specifications/dublin-core/dcmi-terms/[]
+
+== Modelling choices
+The following information is required:
+
+[source,json]
+--
+"@id": "urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc", <1>
+"dcterms:issued": {
+  "@value": "2025-12-05T12:34:56Z", <2>
+  "@type": "xsd:date"
+},
+"dcterms:publisher": {
+  "@id": "urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55",
+  "dcterms:title": "Liander" <3>
+},
+"dcterms:conformsTo": [
+  {
+    "@id": "https://modellen.netbeheernederland.nl/nbnl-equipment/1.0" <4>
+  }
+],
+"dcterms:references": [
+  {
+    "@id": "urn:uuid:4562ba86-b5e0-470b-8e36-dae55428d77f" <5>
+  }
+]
+--
+
+1. @uid: Unique identifier for this dataset. Use a generated UUID;
+2. issued: Issuance data, start of the validity period for this dataset;
+3. publisher: The publisher of the dataset. Use the mRID & name from the https://modellen.netbeheernederland.nl/object-register/[NBNL Object Register];
+4. conformsTo: Schema to validate the dataset against. Verify usage of the correct version;
+5. references: any datasets this dataset is dependant on.

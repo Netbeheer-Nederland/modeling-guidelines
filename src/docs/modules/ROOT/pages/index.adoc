@@ -47,3 +47,4 @@ patterns are defined:
 * xref::assets_work.adoc[]
 * xref::busbarsection.adoc[]
 * xref::busbarconfiguration.adoc[]
+* xref::metadata.adoc[]
