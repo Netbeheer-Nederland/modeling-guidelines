@@ -7,3 +7,4 @@
 ** xref::assets_work.adoc[]
 ** xref::busbarsection.adoc[]
 ** xref::busbarconfiguration.adoc[]
+** xref::identifiedobject.adoc[]
