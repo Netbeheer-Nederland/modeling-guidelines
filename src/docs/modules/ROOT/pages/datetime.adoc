@@ -15,8 +15,7 @@ The Common Information Model (CIM) in the energy sector, particularly under ENTS
 Time Standard: Most European power markets operate in CET (UTC+1) or CEST (UTC+2) to handle day-ahead and intraday market coupling.
 
 == Definition
-Date and time as "yyyy-mm-ddThh:mm:ss.sss", which conforms with ISO 8601.
-UTC time zone is specified as "yyyy-mm-ddThh:mm:ss.mmmZ". The second component (shown here as "ss.mmm") could have any number of digits in its fractional part to allow any kind of precision beyond seconds.
+Date and time as "yyyy-mm-ddThh:mm:ss.mmm", which conforms with ISO 8601. The UTC time zone is defined as Zulu (UTC+0) ("yyyy-mm-ddThh:mm:ss.mmmZ"). The second component (shown here as "ss.mmm") could have any number of digits in its fractional part to allow any kind of precision beyond seconds.
 
 == Modelling choices
 As best practise, it is highly recommended to store all date data in GMT/UTC and convert to CET/CEST only at the display or user-interface stage to avoid issues with daylight savings
@@ -39,7 +38,7 @@ Zulu time (UTC or GMT) is used in aviation, military, and international operatio
 === DateTime Structure (UTC+0)
 A fully qualified CIM Datetime string format is:
 
-    yyyymmddThhmmss.mmmmmZ
+    yyyy-mm-ddThh:mm:ss.mmmmmZ
 
 ** yyyy: Year
 ** mm: Month
