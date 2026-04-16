@@ -1,4 +1,4 @@
-== DateTime
+= DateTime
 include::partial$include.adoc[]
 :author: Arend Hagreis
 :email: ahagreis@netbeheernederland.nl
