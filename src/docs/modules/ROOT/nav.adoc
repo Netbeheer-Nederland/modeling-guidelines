@@ -5,7 +5,7 @@
 ** xref::boundary_point.adoc[]
 ** xref::location.adoc[]
 ** xref::assets_work.adoc[]
-** xref::datetime.adoc[DateTime]
+** xref::datetime.adoc[]
 ** xref::coordinatesystem.adoc[]
 ** xref::busbarsection.adoc[]
 ** xref::busbarconfiguration.adoc[]
