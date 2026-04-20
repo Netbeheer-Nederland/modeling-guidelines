@@ -28,9 +28,11 @@ https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on G
 
 The electrical grid is an interconnected network for electricity delivery from power producers to consumers. It consists of *power plants*, *electric power transmission* to carry power over long distances, *electric power distribution* to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. As such they are the humming hearts of the electrical grid.
 
+*Transmission of electrical power* (generation system in red, transmission system in blue, distribution system in green):
+
 image::Electricity_grid_simple-_North_America.svg[]
 
-https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Diagram of an electrical grid] (generation system in red, transmission system in blue, distribution system in green).
+https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Source]: __United States Department of Energy, SVG version by User:J JMesserly, Public domain, via Wikimedia Commons__
 
 == A Substation
 So what does this humming heart look like? An electrical https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Substation.html[Substation] contains one or more https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformer.html[PowerTransformer]s. A PowerTransformer uses  windings, the so called https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformerEnd.html[PowerTransformerEnd]s, to step up or step down the voltage. In a *step down* PowerTransformer, the PowerTransformerEnd with the highest voltage (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/BaseVoltage.html[BaseVoltage]) is called the _primary_ PowerTransformerEnd. The other PowerTransformerEnds, with lower voltages,  are called _secondary_, _tertiary_  and so on. Usually it stops at secondary PowerTransformerEnd. 
