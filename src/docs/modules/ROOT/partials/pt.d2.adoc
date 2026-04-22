@@ -1,0 +1,30 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: down
+
+PowerSystemResource.class: grid
+Equipment.class: grid
+ConductingEquipment.class: grid
+PowerTransformer.class: grid
+PowerTransformerEnd.class: grid
+TransformerEnd.class: grid
+Terminal.class: grid
+
+
+PowerSystemResource <- Equipment
+Equipment <- ConductingEquipment
+ConductingEquipment <- PowerTransformer
+PowerTransformerEnd -- PowerTransformer
+TransformerEnd <- PowerTransformerEnd
+Terminal -- TransformerEnd
+Terminal -- ConductingEquipment: {
+  style: {
+    stroke: red
+    opacity: 0.5
+    stroke-width: 2
+    stroke-dash: 5
+  }
+}
+----

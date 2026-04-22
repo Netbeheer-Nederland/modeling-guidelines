@@ -10,5 +10,6 @@
 ** xref::coordinatesystem.adoc[]
 ** xref::busbarsection.adoc[]
 ** xref::busbarconfiguration.adoc[]
+** xref::powertransformer.adoc[]
 ** xref::metadata.adoc[]
 ** xref::identifiedobject.adoc[]

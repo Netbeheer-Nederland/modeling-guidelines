@@ -1,0 +1,50 @@
+= PowerTransformer
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** (Power) Transformer **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+== Definition
+The Transformer is an electrical device consisting of two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits.
+
+Transformers can be used to control voltage and phase shift (active power flow). A power transformer may be composed of separate transformer tanks that need not be identical. A power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations. A power transformer typically has two terminals, but may have one (grounding), three or more terminals.
+
+== Core entities
+The transformer is a complex electrical device. The first version in CIM was based on the fact that the power transformer is a device that can be modeled as conducting equipment. Later, it became apparent that this entailed limitations; among other things, specific properties proved difficult to define, such as properties associated with a winding.
+
+Furthermore, conducting equipment has the limitation that a maximum of 2 terminals can be assigned, so modeling more than 2 windings was a challenge in case of 3 tier or more transformers.
+
+To resolve this, PowerTransformerEnds (with a relation to the terminal) were introduced that do NOT inherit from the conducting equipment, providing more freedom to endow them with specific attributes and relationships. Thus, the relationship from the terminal to the power transformer is for backward compatibility and/or when greatly simplified connectivity is desired with transformers of up to 2 tiers (ends).
+
+The Terminals in this representation have an association to the PowerTransformer since it now inherits from ConductingEquipment (shown as the dotted line in the diagram), but there is also a direct association between TransformerEnd and Terminal. For the NBNL profiles (EQ) currently we will not implement and/or use the (dotted) relationship (terminal->Powertransformer); the expectation is that we will not have a use case for this.
+The black arrow in the diagram represents an inheritance relationship, while a line represents an association.
+
+.cim:PowerTransformer
+include::partial$pt.d2.adoc[]
+
+The core entities in the diagram are:
+
+* {tc57}/ConductingEquipment.html[cim:ConductingEquipment]: The parent class for all equipment that can conduct electricity, including transformers.
+* {tc57}/PowerTransformer.html[cim:PowerTransformer]: The container representing the entire unit.
+* {tc57}/TransformerEnd.html[cim:TransformerEnd]: Represents each winding of the transformer, with specific attributes for electrical parameters and connections.
+* {tc57}/PowerTransformerEnd.html[cim:PowerTransformerEnd]: Associated with the transformer and contains the electrical parameters for a specific winding.
+* {tc57}/Terminal.html[cim:Terminal]: Associated with the PowerTransformerEnd to provide the actual connection point to a ConnectivityNode (the network graph).
+
+For complex setups like transformer banks, CIM uses {tc57}/TransformerTank.html[cim:TransformerTank] and {tc57}/TransformerTankEnd.html[cim:TransformerTankEnd] to model individual phases or unbalanced representations within the broader PowerTransformer object (not part of the above diagram)
+
+== Modelling choices
+Furthermore, there are a number of other classes around the transformer, e.g. the TransformerTankEnd; this is important when calculating non-symmetrical (un-balanced) grids (distribution network is essentially an un-balanced network). For now, the assumption is that we cannot yet properly define asymmetry and therefore cannot really incorporate it into calculations, but in the long term, the expection is that we might equip the PowerTransformer with the additional TransformerTank class and the corresponding TankEnds.
+
+The inherited association ConductingEquipment.BaseVoltage should not be used or the association with the {tc57}/VoltageLevel.html[cim:VoltageLevel] equipment container. The association from {tc57}/TransformerEnd.html[cim:TransformerEnd] to {tc57}/BaseVoltage.html[cim:BaseVoltage] should be used instead. The reason is that the BaseVoltage of every transformer end can differ. The use of a VoltageLevel is because of this not possible from the perspective that there are more than one VoltageLevel / BaseVoltage. The base voltage of the transformer end is relevant for calculations and should be used instead. See also xref::BaseVoltage.adoc[BaseVoltage].
+
+For more information on the PowerTransformer, see the IEC CIM documentation and the following resources:
+
+https://www.maddox.com/electrical-transformers[]
+
+https://www.iqsdirectory.com/articles/electric-transformer/power-transformers.html
+
