@@ -1,4 +1,4 @@
-[d2,svg]
+[d2,width=80%,svg]
 ----
 include::partial$diagrams/cim_legend.d2[]
 
