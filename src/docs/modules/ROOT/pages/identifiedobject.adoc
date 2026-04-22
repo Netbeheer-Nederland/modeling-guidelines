@@ -1,0 +1,55 @@
+= IdentifiedObject
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+The cim:mRID (Master Resource Identifier) as part of the IndentifiedObjects class is a unique identification code issued by a model authority for objects within the Common Information Model (CIM). It is used to uniquely identify network components (such as lines, transformers) globally, preferably via a UUID, and is crucial for data exchange.
+
+== Definition
+*IdentifiedObject* is a root class to provide common identification for all classes needing *identification* and *naming attributes*.
+The mRID attribute in this class is a unique identification code issued by a model authority (the (data) owner) for most objects within the Common Information Model (CIM).
+
+== Core entities
+The identifiedObject class has two core attributes for identification and naming:
+
+* {tc57}/IdentifiedObject.html#mRID[mRID] - Master resource identifier issued by a model authority.
+* {tc57}/IdentifiedObject.html#name[name] - free human readable and possibly non unique text naming the object.
+
+.cim:IdentifiedObject
+include::partial$identifiedobject.d2.adoc[]
+
+== Modelling choices
+Object identification (ID) is intended for machine consumption
+
+* IDs must be globally unique and persistent over time
+* Avoid human intervention in managing IDs -> simple and cheap
+
+Object naming is intended for human consumption
+
+* Names are created and managed by humans
+* Names do not have to be unique and may change but
+** Non unique names may lead to confusion and mistakes
+** Changing names may also lead to confusion and mistakes
+
+In CIM, relationships between objects are typically established using the Master Resource Identifier (mRID), as it provides a stable and unique identifier, while the name serves as a human-readable label that can be used for display purposes or to provide additional context about the object.
+
+=== The mRID is based on a UUID and is unique and persistent.
+The mRID is unique within an exchange context, but preferably *Global uniqueness* should be achieved. This can be done by using a UUID, as specified in https://interoperable-europe.ec.europa.eu/collection/ict-standards-procurement/solution/uuid-rfc-4122-universally-unique-identifier-uuid-urn-namespace[RFC 4122], for the mRID. The use of UUID is strongly recommended.
+
+The mRID is associated with the @id and the mRID attributes in Json-ld files.
+[source,json]
+--
+    {
+      "@id": "urn:uuid:4b1ce74e-2909-4311-9d12-bc6c12c45006",
+      "@type": "cim:Substation",
+      "cim:IdentifiedObject.mRID": "4b1ce74e-2909-4311-9d12-bc6c12c45006",
+      "cim:IdentifiedObject.name": "Netstation Fictief"
+    }
+--
+
