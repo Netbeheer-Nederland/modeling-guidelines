@@ -1,0 +1,40 @@
+= BaseVoltage
+
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**.
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+== Definition
+
+BaseVoltage: The BaseVoltage defines the nominal system voltage level for electrical equipment.
+
+It is primarily used to categorize equipment (like ACLineSegments), group voltage levels, and perform calculations, such as load demand response based on nominal voltage.
+
+
+== Core entities
+In CIM, a **Base Voltage** is modelled with the {tc57}/BaseVoltage.html[cim:BaseVoltage] object and is associated with the {tc57}/ConductingEquipment.html[cim:ConductingEquipment], the {tc57}/TransformerEnd.html[cim:TransformerEnd], the {tc57}/VoltageLevel.html[cim:VoltageLevel] container and the {tc57}/TopologicalNode.html[cim:TopologicalNode].
+
+.cim:BaseVoltage
+include::partial$basevoltage.d2.adoc[]
+
+
+== Modelling choices
+
+In CIM, it is common for the equipment in the {tc57}/Substation.html[cim:SubStation] (the internal world) to be organized into voltage level containers (or indirectly in a bay, which in turn is related to a voltage level).
+The conducting equipment adopts the base voltage from the corresponding VoltageLevel association to the BaseVoltage.
+
+.cim:BaseVoltage Substation
+include::partial$basevoltagesubstation.d2.adoc[]
+
+An exception to this are the {tc57}/Powertransformer.html[cim:(Power)Transformers], which are not part of one VoltageLevel and therefore require a direct association of {tc57}/PowerTransformerEnd.html[cim:(Power)TransformerEnds] to the BaseVoltage.
+
+Particularly for distribution networks, the relevant equipment is located primarily outside the station (the external world), and direct associations of ConductingEquipment to BaseVoltage are necessary here as well.
+Conducting equipment, such as an {tc57}/ACLineSegment.html[cim:ACLineSegment], uses also the direct association ConductingEquipment to the BaseVoltage.
+
+.cim:BaseVoltage Equipment
+include::partial$basevoltageequipment.d2.adoc[]

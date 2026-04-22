@@ -16,7 +16,7 @@ However, they can also be used based on flexible or rigid busbars to connect hig
 .Distribution Busbar - https://en.wikipedia.org/wiki/Busbar#/media/File:Busbars.jpg[wikipedia]
 image::image-2026-03-23-11-25-33-806.png[alt="Distribution Busbar"]
 
-.Flexible Busbar - https://en.wikipedia.org/wiki/Busbar#/media/File:Busbars.jpg[wikipedia]
+.Flexible Busbar - https://en.wikipedia.org/wiki/Busbar#/media/File:UW_Ebingen_Sammelschienen.jpg[wikipedia]
 image::image-2026-03-23-12-06-40-874.png[alt="Flexible Busbar"]
 
 == Definition
