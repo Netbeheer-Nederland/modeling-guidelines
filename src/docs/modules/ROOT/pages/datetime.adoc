@@ -1,0 +1,55 @@
+= DateTime
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **  **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+The Common Information Model (CIM) in the energy sector utilizes specific datetime formats for market and grid data exchange. Most European power markets operate in CET (UTC+1) or CEST (UTC+2) to handle day-ahead and intraday market coupling.
+
+As best practise, it is highly recommended to store all date data in GMT/UTC+0 and convert to CET/CEST only at the display or user-interface stage to avoid issues with daylight savings. This approach ensures consistency across datasets and prevents errors in time-sensitive applications, especially during daylight saving time changes.
+
+== Definition
+Date and time as "yyyy-mm-ddThh:mm:ss.mmm", which conforms with https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601]. The UTC time zone is defined as Zulu (UTC+0) ("yyyy-mm-ddThh:mm:ss.mmmZ"). The second component (shown here as "ss.mmm") could have any number of digits in its fractional part to allow any kind of precision beyond seconds.
+
+== Modelling choices
+As best practise, it is highly recommended to store all date data in GMT/UTC and convert to CET/CEST only at the display or user-interface stage to avoid issues with daylight savings
+
+=== Format Requirement:
+The NBNL datasets and profiles, date and time are typically formatted according to https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] standards and based on the Zulu time (UTC+0 or GMT) standard. This approach guarantees consistency across datasets and prevents errors in time-sensitive applications, especially during daylight saving time changes. It ensures precise coordination, simplifies scheduling, and prevents errors by using a 0-hour offset from Greenwich, England.
+
+=== Key reasons to use Zulu Time:
+** Safety and Standardization: Provides a consistent, universal reference for air traffic control, flight planning, and international operations, minimizing the risk of miscommunication.
+
+** Uniformity: It is unaffected by geographic locations, local time zones, or daylight saving time.
+
+** Clear Logistics: Enables worldwide synchronization for meteorology, computer networks, and global financial markets.
+
+=== DateTime Structure (UTC+0)
+A fully qualified CIM Datetime string format is:
+
+    yyyy-mm-ddThh:mm:ss.mmmmmZ
+
+** yyyy: Year
+** mm: Month
+** dd: Day
+** T: Date-Time separator
+** hh: Hour (00-23)
+** mm: Minute
+** ss: Second
+** mmmmm: Microseconds
+** Z: (Zulu) is UTC+0 or GMT
+
+(The "T" divider is used to clearly separate the date from the time, ensuring unambiguous, machine-readable, and precise timestamping)
+
+=== Examples:
+ 2025-10-15T07:00:00.000Z
+ 2025-10-15T07:00:00Z
+ 2025-10-15
+
+

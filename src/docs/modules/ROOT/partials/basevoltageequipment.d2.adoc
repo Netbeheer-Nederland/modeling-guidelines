@@ -1,0 +1,14 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+BaseVoltage.class: grid
+
+ConductingEquipment.class: grid
+TransformerEnd.class: grid
+ACLineSegment.class: grid
+
+BaseVoltage -- ConductingEquipment
+BaseVoltage -- TransformerEnd
+ConductingEquipment -- ACLineSegment
+----
