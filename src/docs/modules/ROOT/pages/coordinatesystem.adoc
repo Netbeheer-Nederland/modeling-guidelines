@@ -1,0 +1,54 @@
+= CoordinateSystem
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Coordinate System **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+
+
+In the context of CIM, the CoordinateSystem class is a fundamental component used to define the spatial or schematic reference frame for power system objects and their associated physical assets. It is part of the IEC 61970 and IEC 61968 standards.
+
+Key Functions:
+
+* Spatial Reference: It provides the context for interpreting latitude, longitude, and elevation (or X, Y, Z coordinates) for assets like substations, cables and for example the EnergyConsumers.
+* Standardization: Instead of defining custom math for every object, CIM uses the CoordinateSystem to point to established global standards (like WGS84 or RD (rijksdriehoek)).
+* Separation of Concerns: It decouples the physical asset (for example a Transformer) from its location, allowing the same asset to have multiple representations (one for a geographical map (https://modellen.netbeheernederland.nl/nbnl-geographical-location[GL Profile]) and one for a schematic diagram (SL profile)).
+
+== Definition
+The crsURN (part of the CoordinateSystem) is a Uniform Resource Name (URN) for the coordinate reference system (crs) used to define the PositionPoint as part of the Location
+
+An example would be the European Petroleum Survey Group (EPSG) code for a coordinate reference system, like the https://epsg.io/4326[EPSG 4326]
+
+
+== Core entities
+
+In CIM, the {tc57}/PositionPoint.html[cim:PositionPoint] containing the X,Y and Z coordinates is related to the {tc57}/Location.html[cim:Location] object. The {tc57}/CoordinateSystem.html[cim:CoordinateSystem]) describes the used coordinate reference system ({tc57}/CoordinateSystem.html#crsUrn[cim:crsURN]) for the PositionPoint coordinates. The CoordinateSystem is a separate object to allow for multiple PositionPoints to reference the same CoordinateSystem.
+
+.cim:Coordinate System (crs)
+include::partial$crs.d2.adoc[]
+
+== Modelling choices
+
+In the https://modellen.netbeheernederland.nl/data-products/information-models/nbnl-profile-group.html[NBNL profilegroups] we are using the European Petroleum Survey Group (EPSG) codes for the coordinate reference system, as defined in URN under the Open Geospatial Consortium (OGC) namespace as: urn:ogc:def:crs:EPSG::XXXX, where XXXX is an EPSG code.
+
+To define the coordinate system as being WGS84 (latitude, longitude) using an EPSG OGC, this attribute would be urn:ogc:def:crs:EPSG::4.3.2.6
+
+A dataset should limit this code to a set of allowed URNs agreed to by all sending and receiving parties.
+
+For now the WGS84 / EPSG 4326 as URNs is allowed:
+
+    {
+      "@id": "urn:uuid:8dabcb33-6555-4ad8-a7ba-f1fb162ae98c",
+      "@type": "cim:CoordinateSystem",
+      "cim:CoordinateSystem.crsUrn": [
+        "urn:ogc:def:crs:EPSG::4.3.2.6"
+      ],
+      "cim:IdentifiedObject.mRID": "8dabcb33-6555-4ad8-a7ba-f1fb162ae98c",
+      "cim:IdentifiedObject.name": "WGS84"
+    },
+
