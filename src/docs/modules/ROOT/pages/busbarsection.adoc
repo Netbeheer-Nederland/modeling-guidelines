@@ -7,7 +7,7 @@ include::partial$header.adoc[]
 == Introduction
 This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Busbar Section**.
 
-Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/background.html#_common_information_model[IEC Common Information Model (CIM)].
 
 Dutch translation of Busbar Section is Rail
 
