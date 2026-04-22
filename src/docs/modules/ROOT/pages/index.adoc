@@ -1,22 +1,15 @@
 = Modeling Guidelines
-
+include::partial$include.adoc[]
+:author: Ritger Teunissen (Alliander)
+:email: ritger.teunissen@alliander.com
 :description: This document describes the modeling guidelines for the NBNL Profile Group.
-:url-repo: https://github.com/Netbeheer-Nederland/modeling-guidelines
-:domain: https://modellen.netbeheernederland.nl
-:uri: {domain}/modeling-guidelines
-
-Author:: mailto:ritger.teunissen@alliander.com[Ritger Teunissen] (Alliander)
-//Editors::
-//mailto:ritger.teunissen@alliander.com[Ritger Teunissen] (Alliander) +
-//mailto:robbert.hardin@alliander.com[Robbert Hardin] (Alliander)
-Version:: {page-component-display-version}
-Feedback::
-https://github.com/Netbeheer-Nederland/modeling-guidelines/issues[Issue on GitHub] (https://github.com/Netbeheer-Nederland/modeling-guidelines[`Netbeheer-Nederland/modeling-guidelines`])
+include::partial$header.adoc[]
 
 This document overviews the grid modelling approach and details the grid model
 data requirements for data supplied by Dutch transmission and distribution
 system operators.
 
+== NBNL grid model
 The NBNL grid model scope includes from the 380kV network down to the lower
 voltage busbars of primary and secondary substations. It also includes details
 of any interconnectors at lower voltages between primary substations needed to
@@ -30,25 +23,20 @@ http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/[Open
 Government License]
 
 == Background
-
 Required background reading the modeling guidelines is found
 xref::background.adoc[here].
 
 == Patterns
-
 The NBNL Profile Group defines a number of _patterns_ to model use cases. Each
-pattern can be used stand-alone, or combined with other patterns. The following
-patterns are defined:
+pattern can be used stand-alone, or combined with other patterns.
 
-* xref::topology.adoc[]
-* xref::boundary_point.adoc[]
-* xref::congestion.adoc[]
-* xref::location.adoc[]
-* xref::assets_work.adoc[]
-* xref::datetime.adoc[]
-* xref::basevoltage.adoc[]
-* xref::coordinatesystem.adoc[]
-* xref::busbarsection.adoc[]
-* xref::busbarconfiguration.adoc[]
-* xref::metadata.adoc[]
-* xref::identifiedobject.adoc[]
+The following patterns are defined:
+
+include::partial$indexpatterns.adoc[]
+
+== Shapes
+Shapes are the fundamental building blocks of the NBNL grid models. They represent a bounded space, the CIM classes are the "building blocks" of a pattern and/or model and grouped based on their NBNL Profiles (like EQ, TP).
+
+The following shapes are defined:
+
+include::partial$indexshapes.adoc[]

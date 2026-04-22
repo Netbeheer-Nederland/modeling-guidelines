@@ -1,15 +1,5 @@
 * xref::background.adoc[]
 * Patterns
-** xref::topology.adoc[]
-** xref::congestion.adoc[]
-** xref::boundary_point.adoc[]
-** xref::location.adoc[]
-** xref::assets_work.adoc[]
-** xref::datetime.adoc[]
-** xref::basevoltage.adoc[]
-** xref::coordinatesystem.adoc[]
-** xref::busbarsection.adoc[]
-** xref::busbarconfiguration.adoc[]
-** xref::powertransformer.adoc[]
-** xref::metadata.adoc[]
-** xref::identifiedobject.adoc[]
+include::partial$indexpatterns.adoc[]
+* Shapes
+include::partial$indexshapes.adoc[]

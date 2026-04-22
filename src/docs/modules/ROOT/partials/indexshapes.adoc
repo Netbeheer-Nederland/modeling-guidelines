@@ -1,0 +1,15 @@
+** General
+*** xref::datetime.adoc[]
+*** xref::identifiedobject.adoc[]
+** Asset
+** Equipment
+*** xref::basevoltage.adoc[]
+*** xref::busbarsection.adoc[]
+*** xref::busbarconfiguration.adoc[]
+*** xref::powertransformer.adoc[]
+** Geographical Location
+*** xref::coordinatesystem.adoc[]
+** Operation
+** Topology
+
+
