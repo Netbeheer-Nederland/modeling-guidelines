@@ -1,0 +1,19 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: down
+
+BaseVoltage.class: grid
+VoltageLevel.class: grid
+
+ConductingEquipment.class: grid
+TransformerEnds.class: grid
+TopologicalNode.class: grid
+
+BaseVoltage -- ConductingEquipment
+BaseVoltage -- TransformerEnds
+BaseVoltage -- VoltageLevel
+BaseVoltage -- TopologicalNode
+----
+
