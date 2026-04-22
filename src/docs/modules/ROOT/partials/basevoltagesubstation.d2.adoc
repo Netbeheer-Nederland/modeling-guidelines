@@ -1,0 +1,16 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+BaseVoltage.class: grid
+Substation.class: grid
+VoltageLevel.class: grid
+Bay.class: grid
+ConductingEquipment.class: grid
+
+VoltageLevel -- BaseVoltage
+Substation -- VoltageLevel
+VoltageLevel -- Bay
+VoltageLevel -- ConductingEquipment
+Bay -- ConductingEquipment
+----
