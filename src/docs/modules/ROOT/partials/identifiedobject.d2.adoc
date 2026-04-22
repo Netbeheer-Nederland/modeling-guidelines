@@ -1,0 +1,18 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: down
+
+IdentifiedObjects.class: grid
+
+IdentifiedObjects: {
+  shape: class
+
+  mRID: string
+  name: string
+  description: string
+  aliasName: string
+}
+
+----

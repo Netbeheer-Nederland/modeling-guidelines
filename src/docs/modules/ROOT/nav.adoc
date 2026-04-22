@@ -10,3 +10,4 @@
 ** xref::coordinatesystem.adoc[]
 ** xref::busbarsection.adoc[]
 ** xref::busbarconfiguration.adoc[]
+** xref::identifiedobject.adoc[]
