@@ -35,13 +35,19 @@ The core entities in the diagram are:
 * {tc57}/PowerTransformerEnd.html[cim:PowerTransformerEnd]: Associated with the transformer and contains the electrical parameters for a specific winding.
 * {tc57}/Terminal.html[cim:Terminal]: Associated with the PowerTransformerEnd to provide the actual connection point to a ConnectivityNode (the network graph).
 
-For complex setups like transformer banks, CIM uses {tc57}/TransformerTank.html[cim:TransformerTank] and {tc57}/TransformerTankEnd.html[cim:TransformerTankEnd] to model individual phases or unbalanced representations within the broader PowerTransformer object (not part of the above diagram)
+If a tap changer is present to control one of the windings then an instance of a {tc57}/PhaseTapChanger.html[cim:PhaseTapChanger] or {tc57}/RatioTapChanger.html[cim:RatioTapChanger] class is associated with that particular winding (PowerTransformerEnd). The tap changer is used to adjust the voltage level of the winding by changing the turns ratio, which in turn affects the voltage and current characteristics of the transformer.
+
+For complex setups like transformer tanks, CIM uses {tc57}/TransformerTank.html[cim:TransformerTank] and {tc57}/TransformerTankEnd.html[cim:TransformerTankEnd] to model individual phases or unbalanced representations within the broader PowerTransformer object (not part of the above diagram)
 
 == Modelling choices
 Furthermore, there are a number of other classes around the transformer, e.g. the TransformerTankEnd; this is important when calculating non-symmetrical (un-balanced) grids (distribution network is essentially an un-balanced network). For now, the assumption is that we cannot yet properly define asymmetry and therefore cannot really incorporate it into calculations, but in the long term, the expection is that we might equip the PowerTransformer with the additional TransformerTank class and the corresponding TankEnds.
 
 The inherited association ConductingEquipment.BaseVoltage should not be used or the association with the {tc57}/VoltageLevel.html[cim:VoltageLevel] equipment container. The association from {tc57}/TransformerEnd.html[cim:TransformerEnd] to {tc57}/BaseVoltage.html[cim:BaseVoltage] should be used instead. The reason is that the BaseVoltage of every transformer end can differ. The use of a VoltageLevel is because of this not possible from the perspective that there are more than one VoltageLevel / BaseVoltage. The base voltage of the transformer end is relevant for calculations and should be used instead. See also xref::BaseVoltage.adoc[BaseVoltage].
 
+=== Current and Potential Transformers
+For operational transmission or distribution models a Current Transformer (CT) or Potential Transformer (PT) does not normally map directly to a piece of conducting equipment in the CIM hierarchy. In an EMS (Energy Management System) the {tc57}/CurrentTransformer.html[CurrentTransformer] does not directly affect the network behaviour and is represented as a point of measurement, so it is not a piece of conducting equipment, but it is an {tc57}/AuxiliaryEquipment.html[AuxiliaryEquipment]. As such a CT or PT is represented as an instance of Measurement assigned to a particular Terminal.
+
+=== More information
 For more information on the PowerTransformer, see the IEC CIM documentation and the following resources:
 
 https://www.maddox.com/electrical-transformers[]
