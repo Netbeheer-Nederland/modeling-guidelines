@@ -1,0 +1,23 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+
+Substation.class: grid
+VoltageLevel.class: grid
+Bay.class: grid
+Equipment.class: grid
+ConductingEquipment.class: grid
+EquipmentContainer.class: grid
+
+
+
+EquipmentContainer <- Substation
+EquipmentContainer <- VoltageLevel
+EquipmentContainer <- Bay
+Equipment <- ConductingEquipment
+EquipmentContainer <- Equipment {source-arrowhead: {shape: diamond}}
+Substation <- VoltageLevel {source-arrowhead: {shape: diamond}}
+Substation <- Bay {source-arrowhead: {shape: diamond}}
+VoltageLevel <- Bay {source-arrowhead: {shape: diamond}}
+----
