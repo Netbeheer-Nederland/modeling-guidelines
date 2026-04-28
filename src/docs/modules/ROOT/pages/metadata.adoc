@@ -5,7 +5,7 @@ include::partial$include.adoc[]
 include::partial$header.adoc[]
 
 == Introduction
-This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **  **.
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the use of the **Meta Data**.
 
 Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
 
