@@ -7,7 +7,7 @@ include::partial$header.adoc[]
 == Introduction
 This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Indentief Object**.
 
-Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
 
 The cim:mRID (Master Resource Identifier) as part of the IndentifiedObjects class is a unique identification code issued by a model authority for objects within the Common Information Model (CIM). It is used to uniquely identify network components (such as lines, transformers) globally, preferably via a UUID, and is crucial for data exchange.
 

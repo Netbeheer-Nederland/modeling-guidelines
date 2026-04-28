@@ -8,7 +8,7 @@ include::partial$header.adoc[]
 == Introduction
 This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the *Busbar Configuration*
 
-Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)] and profiles like the European Style Market Profile (ESMP).
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)] and profiles like the European Style Market Profile (ESMP).
 
 == BusbarConfiguration
 

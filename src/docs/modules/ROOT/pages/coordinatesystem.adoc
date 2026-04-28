@@ -8,8 +8,7 @@ include::partial$header.adoc[]
 == Introduction
 This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Coordinate System **.
 
-Most of the terms in this document are used within the energy industry, particularly in standards like the https://modellen.netbeheernederland.nl/modeling-guidelines/draft-busbarsection/background.html#_common_information_model[IEC Common Information Model (CIM)].
-
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
 
 In the context of CIM, the CoordinateSystem class is a fundamental component used to define the spatial or schematic reference frame for power system objects and their associated physical assets. It is part of the IEC 61970 and IEC 61968 standards.
 
