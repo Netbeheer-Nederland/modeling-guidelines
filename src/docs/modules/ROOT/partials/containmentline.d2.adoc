@@ -1,0 +1,14 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+
+Line.class: grid
+ConductingEquipment.class: grid
+EquipmentContainer.class: grid
+Equipment.class: grid
+
+EquipmentContainer <- Line
+Equipment <- ConductingEquipment
+EquipmentContainer <- Equipment {source-arrowhead: {shape: diamond}}
+----

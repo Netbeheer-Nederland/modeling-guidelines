@@ -1,0 +1,47 @@
+= Containment
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Containment of Equipment **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+CIM has an Equipment Container class that provides a means of grouping pieces of Equipment together to represent both electrical and non-electrical containment.
+
+== Core entities
+Subclasses of {tc57}/EquipmentContainer.html[cim:EquipmentContainer] include:
+
+* {tc57}/Substation.html[cim:Substation]
+* {tc57}/VoltageLevel.html[cim:VoltageLevel]
+* {tc57}/Bay.html[cim:Bay]
+* {tc57}/Line.html[cim:Line]
+
+== Modelling choices
+
+=== Substation Containment
+Within Substations there is a containment *hierarchy* for the subclasses of EquipmentContainer
+
+* A Bay can contain {tc57}/Equipment.html[cim:Equipment]
+* A VoltageLevel can contain Equipment and Bays
+* A Substation can contain Equipment, VoltageLevels and Bays
+
+.cim: Substation Containment
+include::partial$containmentsubstation.d2.adoc[]
+
+=== Line Containment
+Lines are also subclasses of EquipmentContainer and can contain equipment, but they are not contained by any other EquipmentContainer. The Equipment in the Line are connected to the network graph via Terminals, but they do not have a containment relationship with any other EquipmentContainer.
+
+.cim: Line Containment
+include::partial$containmentline.d2.adoc[]
+
+=== Geographical Containment
+Substations and Lines are contained by {tc57}/SubGeographicalRegion.html[cim:SubGeographicalRegion] (https://modellen.netbeheernederland.nl/object-register/#_cimsubgeographicalregion[TSO/DSO service area]). Which in turn are within a {tc57}/GeographicalRegion.html[cim:GeographicalRegion] (https://modellen.netbeheernederland.nl/object-register/#_cimgeographicalregion[Country]). This is important for geographical containment and for the use of xref::coordinatesystem.adoc[geospatial coordinates] (latitude and longitude) for the equipment contained within the Substation.
+
+See also the https://modellen.netbeheernederland.nl/object-register/
+
+.cim: Geographical Containment
+include::partial$containmentgeo.d2.adoc[]
+

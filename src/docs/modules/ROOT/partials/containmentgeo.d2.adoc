@@ -1,0 +1,20 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+GeographicalRegion.class: grid
+SubGeographicalRegion.class: grid
+Substation.class: grid
+Line.class: grid
+VoltageLevel.class: grid
+Bay.class: grid
+EquipmentContainer.class: grid
+
+GeographicalRegion <- SubGeographicalRegion {source-arrowhead: {shape: diamond}}
+SubGeographicalRegion <- Substation {source-arrowhead: {shape: diamond}}
+SubGeographicalRegion <- Line {source-arrowhead: {shape: diamond}}
+EquipmentContainer <- Line
+EquipmentContainer <- Substation
+Substation <- VoltageLevel {source-arrowhead: {shape: diamond}}
+Voltagelevel <- Bay {source-arrowhead: {shape: diamond}}
+----
