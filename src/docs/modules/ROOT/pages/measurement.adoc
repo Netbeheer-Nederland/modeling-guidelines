@@ -1,0 +1,117 @@
+= Measurement and Measurement Values
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Measurements and Measurement Values **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+Measurements are the foundational data points that represent the physical state variables within industrial systems, enabling monitoring, control, and optimization of processes. State variables are independent properties that describe the current condition of a system, regardless of its history.
+
+Measurements convert physical, chemical, or environmental properties into electrical signals, which are then used by control systems to maintain optimal production conditions. Each industrial process has its specific types of measurements. A power system typically has current, voltages, power flows, positions (e.g. breakers, isolators), fault indications (e.g. oil pressure, over temperature), counters (e.g. energy), etc.
+
+Measurements provide the necessary input for control algorithms, acting as the feedback in a control loop. Different use-cases where measurements are part of include:
+
+* *Sensors and Transmitters:* Sensors (e.g. currenttransformer (CT) and their transducers) measure physical properties, while transmitters send this data to a central controller.
+* *Process Dynamics:* Measured state variables are used to calculate process deviations from the setpoint, allowing controllers to make adjustments to manipulated variables (e.g., opening a switch).
+* *Soft Sensing:* In cases where direct measurement is difficult or expensive, state estimators use available noisy measurements to infer unmeasured state variables.
+
+== Core entities
+The name *_Measurement_* would seem to indicate that all state variables ({tc57}/MeasurementValues.html[cim:MeasurementValues]) are measured. This is not always the case as many measurements are calculated by modules in the Energy Management Systems (e.g. SCADA), such as state estimators, power flow calculations or may be derived from measurements of current and voltage in the case of active power.
+
+As stated in cim, a {tc57}/Measurement.html[cim:Measurement] represents any measured, calculated or non-measured non-calculated quantity. As a consequence, a measurement may have several alternate values (see {tc57}/MeasurementValueSource.html[cim:MeasurementValueSource]), e.g. operator (manually maintained), SCADA (telemetered), (state) estimated, calculated, powerflow, etc.).
+
+As stated in cim, a {tc57}/Measurement.html[cim:Measurement] represents any measured, calculated or non-measured non-calculated quantity. Consequently, a measurement may have several alternate values (see {tc57}/MeasurementValueSource.html[cim:MeasurementValueSource]), e.g. operator (manually maintained), SCADA (telemetered), (state) estimated, calculated, powerflow, etc.)
+
+Any piece of {tc57}/Equipment.html[cim:Equipment] ({tc57}/PowerSystemResource.html[cim:PowerSystemResource] - PSR) may contain Measurements, e.g.
+
+* a Substation may have Temperature measurements and Door Open indications,
+* a Transformer may have Oil Temperature and Tank Pressure measurements,
+* a Bay may contain a number of Power Flow measurements and
+* a Breaker may contain a Switch Status measurement.
+
+=== Attachment of measurements (PSR)
+The Power System Resource (PSR) - Measurement association is intended to capture this use of Measurement and is included in the xref::containment.adoc[*Naming Hierarchy*] based on EquipmentContainer. These Measurements are contained by a PSR. This is sufficient for Measurements that are not related to connectivity, e.g. Temperature, Weight, Size. To specify the (sensing) location of a Measurement in the network, an association to {tc57}/Terminal.html[cim:Terminal] is used (see  xref::{docname}#_attachment_of_measurements_terminals)[here]).
+
+A PowerSystemResource (PSR) may have zero to many measurements associated with it. Each measurement may have one or more measurement values. The Measurement and MeasurementValue models are part of https://modellen.netbeheernederland.nl/nbnl-operation[NBNL Operation profile].
+
+.cim: Navigating from PSR to Measurement
+include::partial$measurementpsr.d2.adoc[]
+
+=== Sensing of measurements (Terminals)
+Some Measurements represent quantities related to a particular sensor location in the network, e.g. a Potential (voltage) Transformer ({tc57}/PotentialTransformer.html[PT]) at a Busbar or a current transformer (({tc57}/CurrentTransformer.html[CT]) at the Bar between a Breaker and an Isolator.
+
+The sensing position of the sensor is not captured in the PSR-Measurement association. Instead, it is captured by the Measurement-Terminal association that is used to define the sensing location in the network topology. The location is defined by the connection of the Terminal to ConductingEquipment.
+
+.cim: The Sensing Position
+include::partial$measurementsensing.d2.adoc[]
+
+If both a Terminal and PSR are associated, and the PSR is of type {tc57}/ConductingEquipment.html[ConductingEquipment], the associated Terminal should belong to that ConductingEquipment instance. When the sensor location is needed both Measurement-PSR and Measurement-Terminal are used together to define the measurement and its location in the network. For example, a voltage measurement at a busbar would be associated with the {tc57}/BusbarSection.html[cim:BusbarSection] (PSR) and the terminal of the Potential Transformer (PT) that is connected to the busbar section. A Current measurement on a line would be associated with the {tc57}/ACLineSegment.html[cim:ACLineSegment] (PSR) and the Terminal of the Current Transformer (CT) that is connected to the ACLineSegment.
+
+=== Attachment of measurements (Terminals)
+*By defining the measurement point as being on a Terminal, the ambiguity is removed and the measurement can be defined as being on a specific point of connection to the network.*
+
+This is particularly important for flow measurements (active power, reactive power, current) where the direction of flow is important. By associating the measurement with a specific terminal, the direction of flow can be determined based on the connectivity of that terminal to the rest of the network. For example, if a current measurement is associated with a terminal on the line connected to a busbar section, the direction of flow can be determined based on whether the terminal is on the sending or receiving end of the ACLineSegment. See the page regarding xref::flowdirection.adoc[Flow direction].
+
+.cim: Navigating from Terminal to Measurement
+include::partial$measurementterminal.d2.adoc[]
+
+Voltages have no direction and can be attached wherever _appropriate_ in relation to the sensor placement. Appropriate in this case means that a voltage measurement still requires a terminal, because the position of a voltage measurement on a open breaker does matter.
+
+Only two types of measurement, TapPosition and SwitchPosition, do not require an association to a Terminal because they are not related to a specific point in the network but rather to the position of a device. For example, a TapPosition measurement would be associated with the tap changer of a transformer, and a SwitchPosition measurement would be associated with a switch, regardless of their terminal connections.
+
+See also the xref::terminals.adoc[Terminals] page for more information.
+
+=== Analog, Accumulator and Discrete measurements
+Three subtypes of Measurement are included in CIM, Analog, Accumulator, String and Discrete.
+To describe what is being measured, the attribute Measurement.measurementType is used.
+
+* Analog represents an analog Measurement.
+* Accumulator represents a Measurement that accumulates over time, such as energy or operation count.
+* Discrete represents a Measurement that can only take on discrete values, such as switch position (open/closed) or tap position (e.g. 1, 2, 3, etc.).
+* StringMeasurement represents a Measurement that can take on string values, such as a status message or a description.
+
+Only particular measurementTypes are valid for each of the subtypes of Measurement. The valid associations are defined in Table 2 of the xref::MeasurementType.adoc#_measurement_types_for_operations_profile[Measurement Type] page.
+
+.cim: analog model
+include::partial$measurementsubtypes.d2.adoc[]
+
+== Modelling choices
+Use of the CIM Measurement classes (Analog, Accumulator, and Discrete) is frequently misunderstood and has changed over time. Measurement will not been used to associate Limits with a piece of Equipment and to define regulated points.
+
+A Measurement can be associated with at most one Terminal and one PowerSystemResource. The association to the PowerSystemResource is required to provide containment information for the Measurement, while the association to the Terminal is used to specify the location of the measurement in the network topology. If a Measurement is associated with a Terminal, it should be associated with a Terminal that belongs to the ConductingEquipment that is being measured.
+
+A Measurement shall be associated with a PowerSystemResource to convey containment information for the Measurement, for example:
+
+* Cable measurements should be associated with an ACLineSegment (ConductingEquipment), not with a Line (EquipmentContainer).
+* Transformer measurements should be associated with a PowerTransformer, not with a Transformer Winding.
+* Voltage measurements should be associated with a piece of ConductingEquipment, not with a VoltageLevel.
+* TapPosition measurement shall be associated with a tap changer (e.g. RatioTapChanger)
+* SwitchPosition measurement shall be associated with a Switch or a subtype of Switch.
+
+The association Measurement-Terminal shall reference a Terminal of the Equipment referenced by Measurement-PowerSystemResource except in cases where Measurement.measurementType is either "TapPosition" or "SwitchPosition" in which the association is not exchanged.
+
+Associating the measurement with a terminal of the wrong equipment or the terminal on the wrong end of the correct piece of equipment will cause problems for State Estimation, the flow direction (polarity) of the measurement, etc. Only two types of measurement, TapPosition and SwitchPosition, do not require an association to a Terminal.
+
+Measurements (Analog) of power and current do have a settings to indicate the direction of positive flow related to the primary conducting equipment. Basically the direction of the flow is determined by the connectivity of the terminal to which the measurement is associated. The Analog.PositiveFlowIn attribute is used to indicate the direction, if true then the convention is that a positive value measured at the Terminal means power or current is flowing into the related PowerSystemResource. See the page regarding xref::flowdirection.adoc[Flow direction].
+
+Measurements of a PowerSystemResource are classified by the attribute measurementType. For the Operations Profile based on the IEC 61970-452 the Measurement.measurementType is *restricted*. This restriction is *NOT* part of the https://modellen.netbeheernederland.nl/nbnl-operation[NBNL Operations profile]. The NBNL profile will follow the defined CIM Measurementtypes en Symbols, even where they don't align with the SI or other standards. The values to be used for Measurement.measurementType are specified in Table 1 of the xref::MeasurementType.adoc#_measurement_type[Measurement Type] page.
+
+A measurement of active power flow on a line in a EMS (e.g. SCADA) may be derived from measurements of current and voltage in the substation. The mapping between the measurements in the EMS and the measurements in the substation is outside the scope of the NBNL Operations profile.
+
+
+== FAQ
+
+FAQ: Why is the value attribute included in the NBNL Operations profile?
+
+The rule below defined for the IEC 61970-452 OP profile regarding the supply of value attribute is not part of the NBNL Operations profile. The value attribute is included in the NBNL Operations profile because it is necessary to provide values for the measurements that are used in the data products and other calculations and analyses.
+
+_C:452:OP:NA:measurement In the context of this profile the following classes: AccumulatorValue, AnalogValue, DiscreteValue, StringMeasurementValue are only used to define measurements that are available via ICCP (inter-control center communications protocol) and to define the location of SCADA (supervisory control and data acquisition) measurements for use by state estimator. It is not used to supply values for those measurements. Consequently, the value attribute is not included in this profile._
+
+== Background
+More background on the difference between active power, reactive power and apparent power can be found in the following resources:
+
+https://eshop.se.com/in/blog/post/difference-between-active-power-reactive-power-and-apparent-power.html

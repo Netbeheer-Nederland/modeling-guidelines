@@ -1,0 +1,36 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+PowerSystemResource.class: grid
+Measurement.class: grid
+ACDCTerminal.class: grid
+Terminal.class: grid
+Analog.class: grid
+Accumulator.class: grid
+Discrete.class: grid
+StringMeasurement.class: grid
+AnalogValue.class: grid
+AccumulatorValue.class: grid
+DiscreteValue.class: grid
+StringMeasurementValue.class: grid
+MeasurementValue.class: grid
+
+ACDCterminal -- measurement
+PowerSystemResource -- Measurement
+ACDCTerminal <- Terminal
+Measurement <- Analog
+Measurement <- accumulator
+Measurement <- Discrete
+Measurement <- StringMeasurement
+Analog -- AnalogValue
+Accumulator -- AccumulatorValue
+Discrete -- DiscreteValue
+StringMeasurement -- StringMeasurementValue
+
+MeasurementValue <-- AnalogValue
+MeasurementValue <-- AccumulatorValue
+MeasurementValue <-- DiscreteValue
+MeasurementValue <-- StringMeasurementValue
+
+----

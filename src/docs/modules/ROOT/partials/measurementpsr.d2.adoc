@@ -1,0 +1,20 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+PowerSystemResource.class: grid
+Measurement.class: grid
+Analog.class: grid
+AnalogValue.class: grid
+MeasurementValue.class: grid
+MeasurementValueSource.class: grid
+Equipment.class: grid
+
+
+PowerSystemResource <- Equipment
+PowerSystemResource -- Measurement
+Measurement <- Analog
+Analog -- AnalogValue
+MeasurementValue <- AnalogValue
+MeasurementValue -- MeasurementValueSource
+----

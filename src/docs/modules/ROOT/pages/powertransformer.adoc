@@ -38,6 +38,9 @@ The core entities in the diagram are:
 For complex setups like transformer banks, CIM uses {tc57}/TransformerTank.html[cim:TransformerTank] and {tc57}/TransformerTankEnd.html[cim:TransformerTankEnd] to model individual phases or unbalanced representations within the broader PowerTransformer object (not part of the above diagram)
 
 == Modelling choices
+
+For the xref::containment.adoc[containment] of the PowerTransfomer the association Equipment.EquipmentContainer is required and shall point to EquipmentContainer of type Substation
+
 Furthermore, there are a number of other classes around the transformer, e.g. the TransformerTankEnd; this is important when calculating non-symmetrical (un-balanced) grids (distribution network is essentially an un-balanced network). For now, the assumption is that we cannot yet properly define asymmetry and therefore cannot really incorporate it into calculations, but in the long term, the expection is that we might equip the PowerTransformer with the additional TransformerTank class and the corresponding TankEnds.
 
 The inherited association ConductingEquipment.BaseVoltage should not be used or the association with the {tc57}/VoltageLevel.html[cim:VoltageLevel] equipment container. The association from {tc57}/TransformerEnd.html[cim:TransformerEnd] to {tc57}/BaseVoltage.html[cim:BaseVoltage] should be used instead. The reason is that the BaseVoltage of every transformer end can differ. The use of a VoltageLevel is because of this not possible from the perspective that there are more than one VoltageLevel / BaseVoltage. The base voltage of the transformer end is relevant for calculations and should be used instead. See also xref::BaseVoltage.adoc[BaseVoltage].
