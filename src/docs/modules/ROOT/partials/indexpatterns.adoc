@@ -2,5 +2,6 @@
 ** xref::boundary_point.adoc[]
 ** xref::congestion.adoc[]
 ** xref::location.adoc[]
+** xref::measurement.adoc[]
 ** xref::metadata.adoc[]
 ** xref::topology.adoc[]

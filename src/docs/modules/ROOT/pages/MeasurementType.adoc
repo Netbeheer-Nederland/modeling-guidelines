@@ -1,0 +1,112 @@
+= MeasurementType
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the **Measurement Type** attribute.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+== Description
+The `MeasurementType` class represents the type of measurement being taken. It is used to categorize and identify different types of measurements in a standardized way.
+
+For the NBNL Operation profile, the MeasurementType is extended with a MeasurementKind enumeration to further categorize measurements based on their purpose or context.
+
+
+== Attributes
+*measurementType*: A string attribute that specifies the type of measurement. This could include values such as "voltage", "current", "power", etc.
+
+== Modelling choices
+* The MeasurementType class is designed to be flexible and extensible, allowing for the addition of new measurement types as needed.
+* The MeasurementType attribute is a string to allow for a wide range of measurement types without being limited to a predefined set of values. However, it is recommended to use standardized measurement types where possible to ensure consistency across different datasets and systems, see table 1.
+* It shall be noted that table 1 is not an exhaustive list and is intended to provide guidance on the types of measurements that are commonly used in power system modeling and analysis.
+* Measurement.Terminal shall reference a Terminal of the Equipment referenced by Measurement.PowerSystemResource except in cases where Measurement.measurementType is either "TapPosition" or "SwitchPosition" in which the association is not exchanged. See also xref::measurement.adoc[Measurement and Measurement Values].
+* The MeasurementType can be used in conjunction with other classes such as Measurement and MeterReading to provide a comprehensive representation of measurement data in power system models. For the use in the Operations profile, see table 2 where the valid measurement types for each of the xref::measurement.adoc#_analog_accumulator_and_discrete_measurements[subtypes of Measurement] (Analog, Accumulator, Discrete) are defined and some extra attributes such as unitSymbol and description are added.
+* The MeasurementType is extended in the NBNL Operation profile with a MeasurementKind enumeration. This attribute can be used to further categorize measurements based on their purpose or context, such as "piekbelasting" (peak load) or "gemiddeldebelasting" (average load), see the xref::MeasurementType.adoc#_measurementkind_for_nbnl_operations_profile[ MeasurementKind for NBNL Operations profile section] below.
+
+== Measurement Types
+This Table describes various types of measurements based on the IEC 61970, the meanings of the columns are as follows:
+
+* *measurementType* (Measurement.measurementType) is the measurement type name.
+* *description* is the description.
+
+.Measurement Types
+[width="100%",options="header"]
+|===
+|measurementType  |  description
+| Current | Current (rms) of a non-three phase circuit
+| ThreePhaseCurrent |   Total current (rms) in a three phase circuit
+|  PhaseCurrent| Measured phase current.
+|  Frequency|  Frequency
+|  PowerFactor|  Power factor not allocated to a phase
+|  ThreePhasePowerFactor|   Average power factor in a three phase circuit
+|  ThreePhaseApparentPower|  Total apparent power in a three phase circuit
+|  ThreePhaseReactivePower|  Total reactive power in a three phase circuit
+|  ThreePhaseActivePower|  Total real power in a three phase circuit.
+|  ApparentPower|  Apparent power in a non-three phase circuit
+|  ReactivePower|  Reactive power in a non-three phase circuit
+|  Voltage|   Voltage (rms) not allocated to a phase
+|  ActivePower|  Real power in a non-three phase circuit
+|  Pressure|  Pressure
+|Temperature  |  Temperature
+| Angle |  Angle between voltage and current
+| ApparentEnergy |   Apparent energy
+| ReactiveEnergy |  Reactive energy
+| ActiveEnergy |  Real energy
+| Automatic |  Automatic operation (not manual)
+|LocalOperation  |  Local operation (not remote)
+| SwitchPosition | Switch position [2bits= intermediate,open,closed,ignore]
+| TapPosition |  Position of power transformer Tap or phaseshifter
+|  OperationCount|  Operation count – typically for switches
+| LineToNeutralVoltage |    Line to neutral voltage.
+|  LineToGroundVoltage|    Line to ground voltage.
+|===
+
+== Measurement Types for Operations profile
+
+Shortlist of measurement types for the Operations profile that are valid for each of the subtypes of Measurement (Analog, Accumulator, Discrete) is defined in Table 2.
+
+The meanings of the columns are as follows:
+
+* *Measurement Subclass* is the subclass of Measurement (Analog, Accumulator, Discrete).
+* *MeasurementType* (Measurement.measurementType) is the measurement type name.
+* *UnitSymbol* is the unit symbol for the measurement type, for example W for power, etc.
+* *Description* is the description.
+
+
+.Operations measurementtypes
+[width="100%",cols="1,2,3,4",options="header"]
+|===
+|Measurement Subclass |MeasurementType |UnitSymbol|Description
+|Analog|ThreePhaseActivePower (\(P\))  |W |Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.
+
+In a symmetrical three-phase AC network, to calculate real (active) power, multiply by the power factor (\(\cos\phi\)): \(P = \sqrt{3} \cdot U \cdot I \cdot \cos\phi\).
+
+||ThreePhaseApparantPower (\(S\)) |VA |Apparent power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.
+
+In a symmetrical three-phase AC network, the correct formula for calculating the total apparent power (\(S\)) using the line-to-line voltage (\(U_{L}\)) and line current (\(I_{L}\)) is:\(S=\sqrt{3}\cdot U\cdot I\)
+
+||ThreePhaseReactivePower (\(Q\)) |VAr|Reactive power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.
+||LineCurrent (\(I_{L}\)) |A|LineCurrent, The symbol A is used in case of three phase AC networks if the three currents are equal or nearly equal.
+||PhaseVoltage (\(U_{ph}\))|V|PhaseVoltage, line-to-earth voltage, line-to-neutral voltage (in a three-phase AC systems with a neutral conductor (low-voltage networks))
+||Voltage (\(U\))/ LineToLineVoltage (\(U_{L}\)) |V|Voltage / LineToLineVoltage, V is the general symbol, with no further indication: line-to-line voltage; line-to-line tension (IEC 60027-7)
+||Angle |deg|
+||Frequency |Hz|
+||TapPosition |none|
+|Accumulator |ApparentEnergy |VAh|
+||ReactiveEnergy |VArh|
+||ActiveEnergy |Wh|
+|Discrete|SwitchPosition |none|
+|===
+
+
+== MeasurementKind for NBNL Operations profile
+
+The {tc57}/MeasurementKind.html[cim:MeasurementKind] is already used in the {tc57}/ReadingType.html[cim:ReadingType] and extended into the NBNL Operation profile as an enumeration for the MeasurementType to further categorize measurements based on their purpose or context. For example, it can be used to indicate whether a measurement is related to peak load ("piekbelasting") or other specific contexts relevant to the operation of the power system.
+
+For Example:
+
+      "cim:Measurement.measurementType": {
+        "@id": "nl:MeasurementKind.piekbelasting"
