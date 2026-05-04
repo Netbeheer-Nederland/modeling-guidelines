@@ -33,7 +33,7 @@ This Table describes various types of measurements based on the IEC 61970, the m
 * *description* is the description.
 
 .Measurement Types
-[width="100%",options="header"]
+[%autowidth.stretch,options="header"]
 |===
 |measurementType  |  description
 | Current | Current (rms) of a non-three phase circuit
@@ -77,7 +77,7 @@ The meanings of the columns are as follows:
 
 
 .Operations measurementtypes
-[width="100%",cols="1,2,3,4",options="header"]
+[%autowidth.stretch,cols="1,2,3,4",options="header"]
 |===
 |Measurement Subclass |MeasurementType |UnitSymbol|Description
 |Analog|ThreePhaseActivePower (\(P\))  |W |Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.
