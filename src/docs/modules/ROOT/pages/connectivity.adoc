@@ -26,62 +26,22 @@ https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on G
 
 == Introduction
 
-The electrical grid is an interconnected network for electricity delivery from power producers to consumers. It consists of *power plants*, *electric power transmission* to carry power over long distances, *electric power distribution* to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. As such they are the humming hearts of the electrical grid.
+The electrical grid consists of *power plants* that generate electrical power, *electric power transmission* to carry power over long distances, *electric power distribution* to carry power to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. These components form an interconnected network for electricity delivery from power producers to consumers. This document describes *connectivity*; the way CIM models how these components are connected.
 
-*Transmission of electrical power* (generation system in red, transmission system in blue, distribution system in green):
+== Connectivity Node
 
-image::Electricity_grid_simple-_North_America.svg[]
+CIM uses connectivity nodes (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[cim:ConnectivityNode]) to model connectivity of equipment. However, connected pieces of (conducting) equipment are not _directly_ associated with such a connectivity node. In stead they are associated _via_ terminals (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[cim:Termnal]):
 
-https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg[Source]: __United States Department of Energy, SVG version by User:J JMesserly, Public domain, via Wikimedia Commons__
-
-== A Substation
-So what does this humming heart look like? An electrical https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Substation.html[Substation] contains one or more https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformer.html[PowerTransformer]s. A PowerTransformer uses  windings, the so called https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/PowerTransformerEnd.html[PowerTransformerEnd]s, to step up or step down the voltage. In a *step down* PowerTransformer, the PowerTransformerEnd with the highest voltage (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/BaseVoltage.html[BaseVoltage]) is called the _primary_ PowerTransformerEnd. The other PowerTransformerEnds, with lower voltages,  are called _secondary_, _tertiary_  and so on. Usually it stops at secondary PowerTransformerEnd. 
-
-A collection of equipments (ConductingEquipment, is this a better choice of word?) with the same BaseVoltage is grouped into a https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/VoltageLevel.html[VoltageLevel]. The name VoltageLevel might be confusing, it is not about the voltage level itself, it is about equipments with the same voltage level. There is a VoltageLevel associated to (the BaseVoltage of) the primary PowerTransformerEnd and one associated to the secondary PowerTransformerEnd. And if there is a tertiary PowerTransformerEnd with the same BaseVoltage as the secondary PowerTransformerEnd they form one and the same VoltageLevel (@Arend, is this correct?).  Hence, the number of VoltageLevels does not need to equal the number of PowerTransformerEnds, it really is about the number of BaseVoltages. 
-
-.CIM:PowerTransformers
-image::PowerTransformers.drawio.svg[]
-
-Besides a *step down* PowerTransformer, there is the aforementioned *step up* PowerTransformer that steps up the voltage (as its name implies). From a CIM-modeling perspective they are equal:
-
-.PowerTransformer
+.ConnectivityNode
 [d2,svg,theme=4]
 ----
 include::partial$/vars.d2[]
 include::partial$/legend.d2[]
 include::partial$/classes.d2[]
-include::partial$/connectivity/PowerTransformer.d2[]
+include::partial$/connectivity/ConnectivityNode.d2[]
 ----
 
-== Connecting Substations
-
-Suppose you have two step down power transformers, a 150kV/10kV stepping down from 150kV to 10kV and a 10kV/0.4kV. You can physicaly model their physical connection by naming all their physical components. That might be useful for an asset manager who has to perform maintenance on them. But when you are an electrical engineer who needs a model to perform grid calculations, this is not useful. You just want to model a connection from one 10kV PowerTransformerEnd to the other 10kV PowerTransformerEnd _and you want to make sure it doesn't mess up your grid calculations_.
-
-In CIM you can connect each 10kV-PowerTransformerEnds to an abstract, non physical, https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[ConnectivityNode] with zero impedance. This ConnectivityNode act as an interface between the  physical modelling and the abstract modelling. Next step in abstract modelling (CIM) is a https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[Terminal]. You might consider a Terminal to be the begin point and end point of an abstract connection. Once again, this should be a useful abstraction; there has to be a use case to model it this way. In case of the electrical engineer: you need a model to perform grid calculations and you don't want your model to mess up your calculations. One such abstraction is the https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/TopologicalNode.html[TopologicalNode]. 
-
-.ConnectedPowerTransformers
-[d2,svg,theme=4]
-----
-include::partial$/vars.d2[]
-include::partial$/legend.d2[]
-include::partial$/classes.d2[]
-include::partial$/connectivity/ConnectedPowerTransformers.d2[]
-----
-
-So now we have a physical 10kV PowerTransformerEnd connected to an abstract Terminal via an interfacing ConnectivityNode. Because a ConnectivityNode has zero impedance it follows from https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws[Kirchhoff's circuit laws] the voltage in Terminal is indeed 10kV as in the PowerTransformerEnd. Both Terminals are connected by a useful abstraction called TopologicalNode. This abstraction is useful because it serves a use case (_don't mess up grid calculations_). In short this is the difference between _connectivity_ and _topology_; a topology is a simplification of a connectivity to serve a specific use case. 
-
-== Connecting System Operators
-
-The electrical grid is an interconnected network with multiple grid operators, also known as System Operators. To distinguish them CIM uses https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/SubGeographicalRegion.html[SubGeographicalRegion]s. Every System Operator has (is) a SubGeographicalRegion and PowerTransformers are part of it:
-
-.CIM:SubGeographicalRegion
-[d2,svg,theme=4]
-----
-include::partial$/vars.d2[]
-include::partial$/legend.d2[]
-include::partial$/classes.d2[]
-include::partial$/connectivity/SubGeographicalRegion.d2[]
-----
+By definition connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance. This enables terminals to be used as  points of connectivity-related measurement in the network such as voltages and current flows. So, in practice, if you have two terminals associated to a breaker and your measurement at these terminals show different voltages then you know this breaker is open. This is the benefit of modeling connectivity with connectivity nodes via terminals.
 
 ---
 
