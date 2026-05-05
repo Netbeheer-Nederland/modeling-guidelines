@@ -30,7 +30,7 @@ The electrical grid consists of *power plants* that generate electrical power, *
 
 == Connectivity Node
 
-CIM uses connectivity nodes (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[cim:ConnectivityNode]) to model connectivity of equipment. However, connected pieces of (conducting) equipment are not _directly_ associated with such a connectivity node. In stead they are associated _via_ terminals (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[cim:Terminal]):
+CIM uses connectivity nodes (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ConnectivityNode.html[cim:ConnectivityNode]) to model connectivity of equipment. However, connected pieces of (conducting) equipment are not _directly_ associated to such a connectivity node. In stead they are associated _via_ terminals (https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/Terminal.html[cim:Terminal]):
 
 .cim:ConnectivityNode
 [d2,svg,theme=4]
@@ -46,7 +46,7 @@ A different, more visual representation might look like this:
 .Connectivity Node 
 image::ConnectivityNode.svg[alt="Artist impression of ConnectivityNode"]
 
-By definition connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance. This enables terminals to be used as  points of connectivity-related measurement in the network such as voltages or phase information (ABC). So, in practice, if you have two terminals associated to a breaker and your measurement at these terminals show different voltages then you know this breaker is open. This is the benefit of modeling connectivity with connectivity nodes via terminals.
+By definition connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance. This enables terminals to be used as  points of connectivity-related measurement in the network such as voltages or phase information (ABC). So, in practice, if you have two terminals associated to a breaker and your measurement at these terminals show different voltages then you know this breaker is open. This is a benefit of modeling connectivity using connectivity nodes via terminals.
 
 .Open Breaker
 image::OpenBreaker.svg[alt="Open Breaker"]
