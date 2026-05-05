@@ -26,7 +26,7 @@ https://github.com/Netbeheer-Nederland/doc-modeling-guidelines/issues[Issue on G
 
 == Introduction
 
-The electrical grid consists of *power plants* that generate electrical power, *electric power transmission* to carry power over long distances, *electric power distribution* to carry power to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. These components form an interconnected network for electricity delivery from power producers to consumers. This document describes *connectivity*; the way CIM models how these components are connected.
+The electrical grid consists of *power plants* that generate electrical power, *electric power transmission* that carry it over long distances, *electric power distribution* that carry it to customers and finally of *electrical substations* that step voltage up or down to enable transmission and distribution. These components form an interconnected network for electricity delivery from power producers to consumers. This document describes *connectivity*; the way CIM models how these components are connected.
 
 == Connectivity Node
 
