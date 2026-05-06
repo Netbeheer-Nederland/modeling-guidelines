@@ -1,3 +1,3 @@
-= Modeling Guidelines
+= Modelling Guidelines
 
 This document overviews the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators.

@@ -6,7 +6,7 @@
 :figure-caption!:
 
 :domain: https://modellen.netbeheernederland.nl
-:doc: modeling-guidelines
+:doc: modelling-guidelines
 :uri: {domain}/{doc}/{doctitle}
 :description: This document describes the {doctitle} as part of the {doc} for the NBNL Profile Group.
 :version: {page-component-display-version}

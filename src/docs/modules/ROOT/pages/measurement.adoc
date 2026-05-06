@@ -74,7 +74,7 @@ To describe what is being measured, the attribute Measurement.measurementType is
 * Discrete represents a Measurement that can only take on discrete values, such as switch position (open/closed) or tap position (e.g. 1, 2, 3, etc.).
 * StringMeasurement represents a Measurement that can take on string values, such as a status message or a description.
 
-Only particular measurementTypes are valid for each of the subtypes of Measurement. The valid associations are defined in Table 2 of the xref::MeasurementType.adoc#_measurement_types_for_operations_profile[Measurement Type] page.
+Only particular measurementTypes are valid for each of the subtypes of Measurement. The valid associations are defined in Table 2 of the xref::measurementtype.adoc#_measurement_types_for_operations_profile[Measurement Type] page.
 
 .cim: analog model
 include::partial$measurementsubtypes.d2.adoc[]
@@ -98,7 +98,7 @@ include::partial$measurementsubtypes.d2.adoc[]
 
 * Measurements (Analog) of power and current do have a settings to indicate the direction of positive flow related to the primary conducting equipment. Basically the direction of the flow is determined by the connectivity of the terminal to which the measurement is associated. The Analog.PositiveFlowIn attribute is used to indicate the direction, if true then the convention is that a positive value measured at the Terminal means power or current is flowing into the related PowerSystemResource. See the page regarding xref::flowdirection.adoc[Flow direction].
 
-* Measurements of a PowerSystemResource are classified by the attribute measurementType. For the Operations Profile based on the IEC 61970-452 the Measurement.measurementType is *restricted*. This restriction is *NOT* part of the https://modellen.netbeheernederland.nl/nbnl-operation[NBNL Operations profile]. The NBNL profile will follow the defined CIM Measurementtypes en Symbols, even where they don't align with the SI or other standards. The values to be used for Measurement.measurementType are specified in Table 1 of the xref::MeasurementType.adoc#_measurement_type[Measurement Type] page.
+* Measurements of a PowerSystemResource are classified by the attribute measurementType. For the Operations Profile based on the IEC 61970-452 the Measurement.measurementType is *restricted*. This restriction is *NOT* part of the https://modellen.netbeheernederland.nl/nbnl-operation[NBNL Operations profile]. The NBNL profile will follow the defined CIM Measurementtypes en Symbols, even where they don't align with the SI or other standards. The values to be used for Measurement.measurementType are specified in Table 1 of the xref::measurementtype.adoc#_measurement_type[Measurement Type] page.
 
 * A measurement of active power flow on a line in a EMS (e.g. SCADA) may be derived from measurements of current and voltage in the substation. The mapping between the measurements in the EMS and the measurements in the substation is outside the scope of the NBNL Operations profile.
 

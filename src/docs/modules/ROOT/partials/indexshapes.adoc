@@ -10,7 +10,7 @@
 ** Geographical Location
 *** xref::coordinatesystem.adoc[]
 ** Operation
-*** xref::MeasurementType.adoc[]
+*** xref::measurementtype.adoc[]
 ** Topology
 
 
