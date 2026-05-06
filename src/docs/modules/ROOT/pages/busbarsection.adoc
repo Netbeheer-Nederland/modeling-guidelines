@@ -35,4 +35,7 @@ In cim the ConnectivityNode objects are the means by which connectivity (see xre
 
 A busbar can have different layouts based for the usage in a {tc57}/VoltageLevel.html[cim:VoltageLevel], see xref::busbarconfiguration.adoc[BusbarConfiguration].
 
-Voltage measurements are typically obtained from voltage transformers that are connected to busbar sections, see also xref::measurements.adoc[Measurements].
+For the xref::containment.adoc[containment] of the BusbarSection the association Equipment.EquipmentContainer is required and shall
+point to EquipmentContainer of type VoltageLevel or Bay (when a disconnector is splitting a busbar section in two).
+
+Voltage measurements are typically obtained from Potential Transformers (PT) that are connected to busbar sections, see also xref::measurement.adoc[Measurements] and xref::powertransformer.adoc#_current_and_potential_transformers[Power Transformer].
