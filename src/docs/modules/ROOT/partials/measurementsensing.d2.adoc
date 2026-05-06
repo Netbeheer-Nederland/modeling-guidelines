@@ -1,0 +1,30 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+PowerSystemResource.class: grid
+Measurement.class: grid
+Equipment.class: grid
+ACDCTerminal.class: grid
+Terminal.class: grid
+ConductingEquipment.class: grid
+Sensor.class: grid
+PotentialTransformer.class: grid
+CurrentTransformer.class: grid
+BusbarSection.class: grid
+ACLineSegment.class: grid
+
+PowerSystemResource <- Equipment
+Equipment <- ConductingEquipment
+ConductingEquipment -- Terminal
+ACDCterminal -- measurement
+PowerSystemResource -- Measurement
+ConductingEquipment <- BusbarSection
+ConductingEquipment <- ACLineSegment
+ACDCTerminal <- Terminal
+Sensor <- PotentialTransformer
+Sensor <- CurrentTransformer
+Terminal --  Sensor
+
+
+----

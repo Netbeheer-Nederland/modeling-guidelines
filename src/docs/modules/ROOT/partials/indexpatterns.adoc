@@ -3,5 +3,6 @@
 ** xref::congestion.adoc[]
 ** xref::containment.adoc[]
 ** xref::location.adoc[]
+** xref::measurement.adoc[]
 ** xref::metadata.adoc[]
 ** xref::topology.adoc[]
