@@ -17,7 +17,7 @@ Transformers can be used to control voltage and phase shift (active power flow).
 == Core entities
 The transformer is a complex electrical device. The first version in CIM was based on the fact that the power transformer is a device that can be modeled as conducting equipment. Later, it became apparent that this entailed limitations; among other things, specific properties proved difficult to define, such as properties associated with a winding.
 
-Furthermore, conducting equipment has the limitation that a maximum of 2 terminals can be assigned, so modeling more than 2 windings was a challenge in case of 3 tier or more transformers.
+Furthermore, conducting equipment has the limitation that a maximum of 2 terminals can be assigned, so modelling more than 2 windings was a challenge in case of 3 tier or more transformers.
 
 To resolve this, PowerTransformerEnds (with a relation to the terminal) were introduced that do NOT inherit from the conducting equipment, providing more freedom to endow them with specific attributes and relationships. Thus, the relationship from the terminal to the power transformer is for backward compatibility and/or when greatly simplified connectivity is desired with transformers of up to 2 tiers (ends).
 

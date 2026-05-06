@@ -1,8 +1,8 @@
-= Modeling Guidelines
+= Modelling Guidelines
 include::partial$include.adoc[]
 :author: Ritger Teunissen (Alliander)
 :email: ritger.teunissen@alliander.com
-:description: This document describes the modeling guidelines for the NBNL Profile Group.
+:description: This document describes the modelling guidelines for the NBNL Profile Group.
 include::partial$header.adoc[]
 
 This document overviews the grid modelling approach and details the grid model
@@ -23,7 +23,7 @@ http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/[Open
 Government License]
 
 == Background
-Required background reading the modeling guidelines is found
+Required background reading the modelling guidelines is found
 xref::background.adoc[here].
 
 == Patterns
