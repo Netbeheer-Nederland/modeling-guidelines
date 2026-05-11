@@ -1,8 +1,8 @@
 = MeasurementType
-include::partial$include.adoc[]
 :author: Arend Hagreis
 :email: ahagreis@netbeheernederland.nl
 :page-stem:
+include::partial$include.adoc[]
 include::partial$header.adoc[]
 
 == Introduction
