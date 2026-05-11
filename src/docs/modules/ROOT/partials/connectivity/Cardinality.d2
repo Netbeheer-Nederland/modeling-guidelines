@@ -1,0 +1,12 @@
+ConductingEquipment: {shape: class}
+Terminal: {shape: class}
+ConnectivityNode: {shape: class}
+
+ConductingEquipment -- Terminal: {
+  source-arrowhead: 1
+  target-arrowhead: 0..*
+}
+Terminal -- ConnectivityNode: {
+  source-arrowhead: 0..*
+  target-arrowhead: 0..1
+}

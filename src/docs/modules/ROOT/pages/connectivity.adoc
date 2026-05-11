@@ -50,7 +50,15 @@ By definition connectivity nodes are points where terminals of conducting equipm
 .Three phases
 image::Phase.svg[alt="Three phases"]
 
-== Multiplicity
+== Cardinality of Terminals
+
+Any terminal is associated to exactly one piece of conducting equipment and it is associated to at mot one connectivity node. On the other hand, any connectivity node can have any number of terminals. Just as any piece of conducting equipment.
+
+.Cardinality
+[d2,svg,theme=4]
+----
+include::partial$/connectivity/Cardinality.d2[alt="Cardinality of Terminals"]
+----
 
 ---
 
