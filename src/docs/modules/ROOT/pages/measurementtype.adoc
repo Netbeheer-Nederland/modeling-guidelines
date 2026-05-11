@@ -2,6 +2,7 @@
 include::partial$include.adoc[]
 :author: Arend Hagreis
 :email: ahagreis@netbeheernederland.nl
+:page-stem:
 include::partial$header.adoc[]
 
 == Introduction
