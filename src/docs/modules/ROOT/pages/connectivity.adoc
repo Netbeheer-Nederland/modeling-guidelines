@@ -47,8 +47,11 @@ image::ConnectivityNode.svg[alt="Artist impression of ConnectivityNode"]
 
 By definition connectivity nodes are points where terminals of conducting equipment are connected together with zero impedance. This enables terminals to be used as  points of connectivity-related measurement in the network such as voltages or phase information (ABC). So, in practice, if you have two terminals associated to a breaker and your measurement at these terminals show different voltages then you know this breaker is open. This is a benefit of modeling connectivity using connectivity nodes via terminals.
 
-.Three phases
-image::Phase.svg[alt="Three phases"]
+.MultiTerminals
+image::MultiTerminals.svg[alt="MultiTerminals"]
+
+.Unbalanced
+image::Unbalanced.svg[alt="Unbalanced"]
 
 == Cardinality of Terminals
 
