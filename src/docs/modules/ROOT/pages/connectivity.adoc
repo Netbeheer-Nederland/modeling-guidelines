@@ -63,9 +63,9 @@ Any terminal is associated to exactly one piece of conducting equipment and it i
 include::partial$/connectivity/Cardinality.d2[alt="Cardinality of Terminals"]
 ----
 
-=== Caveats
+=== Requirements and constraints
 
-Please note there are some requirements and constraints. You can find them at https://connect.nen.nl/Standard/PopUpHtml?RNR=3659951&search=&Native=1&token=2f83a08b-fd9c-450c-b760-ece017b60721#4.3Requirementsandconstraints[IEC 61970-452 4.3 Requirements and constraints]
+Please note there are some requirements and constraints. You can find them at https://connect.nen.nl/Standard/PopUpHtml?RNR=3659951&search=&Native=1&token=2f83a08b-fd9c-450c-b760-ece017b60721#4.3Requirementsandconstraints[IEC 61970-452 4.3 Requirements and constraints]. Here are a  requirement and constraint concerning terminals:
 
 ==== Constraint 452 Terminal:connection (EQ-profile only)
 
@@ -90,7 +90,7 @@ The following ConductingEquipment classes have two terminals:
 
 The PowerTransformer class typically has two terminals but may also have one or more terminals. For example, a zig-zag connected grounding transformer may have one terminal. Three terminal transformers are commonly used in transmission systems and in special cases transformers may have four, five, or more terminals. All other ConductingEquipment leaf classes (notably also including Clamp and BusbarSection) and DCConductingEquipment have a single terminal.
 
-https://connect.nen.nl/Standard/PopUpHtml?RNR=3638054&search=&Native=1&token=c2ad0bfb-4555-4275-96f3-03f2b39c1616#4.8.2NumberofterminalsforConductingEquipmentobjects[IEC 61970-301:2020, 4.8.2 "Number of terminals for ConductingEquipment objects."]
+Quoted from: https://connect.nen.nl/Standard/PopUpHtml?RNR=3638054&search=&Native=1&token=c2ad0bfb-4555-4275-96f3-03f2b39c1616#4.8.2NumberofterminalsforConductingEquipmentobjects[IEC 61970-301:2020, 4.8.2 "Number of terminals for ConductingEquipment objects."]
 
 ---
 
