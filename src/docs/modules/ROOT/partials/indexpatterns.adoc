@@ -5,4 +5,5 @@
 ** xref::location.adoc[]
 ** xref::measurement.adoc[]
 ** xref::metadata.adoc[]
+** xref::standardannualvolume.adoc[]
 ** xref::topology.adoc[]

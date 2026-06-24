@@ -1,0 +1,45 @@
+= Standard Annual Volume (SJA & SJI)
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+
+The *Standard Annual Volume* is a specific Dutch market concept and consists of an *SJA* for consumption and an *SJI* for feed-in.
+
+In the Electricity Information Code, you will find this listed as:
+
+* Standard Annual Consumption: The expected  'gross' consumption from the grid under standardized conditions and based on a normalized year (SJA - https://begrippen.netbeheernederland.nl/doc/e2ifi[StandaardJaarAfname]).
+
+* Standard Annual Feed-in: The expected 'gross' feed-in to the grid under standardized conditions and based on a normalized year (SJI - https://begrippen.netbeheernederland.nl/doc/jdy8n[StandaardJaarInvoeding]).
+
+In the Common Information Model (CIM), Standard Annual Volume (https://begrippen.netbeheernederland.nl/doc/y4yex[StandaardJaarVolume]) can be accommodated in the standard CIM classes within attributes related to estimated consumption, meter data or market parameters.
+
+Furthermore, because CIM is an extensible model, Dutch grid operators and market parties often use Extensions (indicated with a prefix such as nl:) to define these specific Dutch concepts.
+
+== Modelling in CIM
+
+=== Specific Attributes
+
+Within the CIM structure, the SJI and SJA can *generally* be accommodated in the following locations:
+
+* CustomerAgreement or ServiceCategory: In the commercial (Market) layer (IEC 61968-11), the Standard Annual Volume can be included as a parameter that determines the pricing or profile type.
+
+* EnergyConsumer: For grid calculations (IEC 61970-301), the load is often defined via this class. Here, an SJA value can be translated into a pfixed (fixed capacity) or linked to a LoadProfile to distribute the annual volume over time.
+
+* UsagePoint (meteringpoint): The meter is a (physical) asset that performs the metering role of the usage point (IEC 61968-9): This is Used for measuring consumption and detection of events. Although the connectionCategory attribute in the cim:usagePoint is not a direct volume value, the SJA is inextricably linked to the profile category (such as E1A, E2A, etc.). The SJA is the numerical value applied within this category.
+
+* AccountingPoint: The AccountingPoint (IEC 62325-351 ESMP) is a specific type of MarketEvaluationPoint used purely for financial settlement and accounting processes. It may cover volumes based on profiles or continuous measurement.
+
+=== Extensions
+
+Based on the energieregisters and in particular the https://modellen.netbeheernederland.nl/stelsel/registers/energie-uitwisselingsregister/1.4/index.html["Energie-Uitwisselregister"] the SJA and SJI is part of the accountingpoint (allocatiepunt). Although the standard CIM does not directly have an Standard Annual Volume attributes or class, this can be modelled via an extension in the NBNL Market (62325) profile (nl:)
+
+* *standardAnnualVolume*
+** FlowDirection [Consumption, Feed-in]
+** TarifPeriod   [normal hours,off-peak hours]
+** Values        [3500 k Wh]
+
+
+Because all NBNL profiles are bases on the CIM ontology and therefore donot include for example the ESMP (European style market profile) there is also a need for extending the Accountingpoint to the NBNL Market Profile.
