@@ -1,0 +1,16 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: right
+
+Terminal {
+  shape: circle
+  width: 20
+  class: grid
+}
+EnergyConsumer.class: grid
+
+Terminal -- EnergyConsumer
+----
+

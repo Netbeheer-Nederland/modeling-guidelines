@@ -1,3 +1,4 @@
+** xref::aggregated_load.adoc[]
 ** xref::assets_work.adoc[]
 ** xref::boundary_point.adoc[]
 ** xref::congestion.adoc[]
@@ -6,3 +7,4 @@
 ** xref::measurement.adoc[]
 ** xref::metadata.adoc[]
 ** xref::topology.adoc[]
+

@@ -1,0 +1,10 @@
+= EnergyConsumer
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators.
+
+See: xref:aggregated_load.adoc[(Aggregated) Load] for a detailed description of the {tc57}/EnergyConsumer.html[cim:EnergyConsumer] class.

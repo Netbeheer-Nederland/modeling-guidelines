@@ -1,0 +1,79 @@
+= (Aggregated) Load
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Aggregated Load (EnergyConsumer) **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+== Definition
+
+In CIM, a load is modelled using a {tc57}/EnergyConsumer.html[*cim:EnergyConsumer*] object along with its associated
+{tc57}/Terminal.html[*cim:Terminal*]. *EnergyConsumers* are modelled in the grid as an endpoint and because of that they have only one *terminal*.
+
+.cim: EnergyConsumer (load)
+include::partial$load.d2.adoc[]
+
+== Core entities
+The *EnergyConsumer* is a *generic user* of energy, it is a point of consumption on the power system model and can be subdivided into the following classes;
+
+* {tc57}/ConformLoad.html[cim:ConformLoad] - represent loads that follow a daily load change pattern where the pattern can be used to scale the load with a system load.
+* {tc57}/NonConformLoad.html[cim:NonConformLoad] - represents loads that do not follow a daily load change pattern and whose changes are not correlated with the daily load change pattern.
+* {tc57}/StationSupply.html[cim:StationSupply] - represents an aggregation of all loads served by a substation and can thus, for example, represent the loads on the output of an MV/LV substation.
+
+== Modelling choices
+The following requirements apply to the modelling of load in the proposed NBNL grid model:
+
+* The {tc57}/EnergyConsumer.html[*cim:EnergyConsumer*] object is used to represent both individual load and aggregate load. Individual load is indicated by {tc57}/Equipment.html#aggregate[*cim:Equipment.aggregate=false*] and aggregate load is indicated by {tc57}/Equipment.html#aggregate[*cim:Equipment.aggregate=true*] in the EnergyConsumer object.
+
+.aggregated load
+include::partial$aggregatedload.d2.adoc[]
+
+* A load which is connected to the grid at a {tc57}/VoltageLevel.html[cim:VoltageLevel] above the lowest modelled voltage level is modelled as individual (aggregate=false) load at its grid location using a cim:EnergyConsumer object.
+
+.Energyconsumer modelled as individual load
+image::image-2026-07-22-13-59-40-157.jpg[]
+
+* A load connected to the grid at or below the lowest modelled voltage level is modelled as aggregate load (group of EnergyConsumers) connected to for example a {tc57}/TopologicalNode.html[cim:TopologicalNode] using a cim:EnergyConsumer object with aggregate=true. The *aggregated* EnergyConsumer describes in this case the total load of all individual EnergyConsumers of the {tc57}/Feeder.html[cim:Feeder].
+
+.Energyconsumer modelled as aggregated load with connection to a TopologicalNode (feeder)
+image::image-2026-07-22-17-00-38-363.jpg[]
+
+The load can also be related to other aggregated equipment like an aggregated {tc57}/BusbarSection.html[cim:BusbarSection] or a {tc57}/Breaker.html[cim:Breaker] based on {tc57}/ConnectivityNode.html[cim:ConnectivityNode]s. All Energyconsumers at and below the lowest modelled voltage level are aggregated into a single EnergyConsumer object with aggregate=true.
+
+.Single Aggregated EnergyConsumer at voltage level
+image::image-2026-07-22-17-21-32-446.jpg[]
+
+The {tc57}/TopologicalNode.html[cim:TopologicalNode] is a more 'generic' object and part of the Topology (TP) profile and can be used to combine multiple connectivitynodes to a single node. This makes it possible to support multiple use cases based on the same EQ profile. Each TP node can support a different aggregation level, for example the connection of an aggregate load to a busbar of a substation or the load at feeder level.
+
+The topological node can be used to reduce not necessary equipment (for a usecase) in the model, for example the topological node can represent a busbar and breakers of a substation to a single node and connect the aggregate load to it.
+
+*The use of a topologicalNode in relation with an aggregate load in case of the NBNL profiles is preferred over the use of a connectivity nodes and aggregated breakers and busbarsections.*
+
+.TopologicalNode in combination with an aggregated load as the total load of a substation
+image::image-2026-07-22-17-27-04-873.jpg[]
+
+In this case the N-1 reduncy of the powertransformers still supported, but the model is more generic and can be used for multiple use cases and in the EQ profile the full connectivity of the substation is still modelled.
+
+An other way to model the total load of a substation is to use the StationSupply class which is a subclass of EnergyConsumer. The StationSupply class can be used to represent the total load of a substation.
+It will represent in that case also the other internal equipment connected to the substation like the PowerTransformers.
+
+== Terminals and the Topological and ConnectivityNodes
+The TopologicalNode is a class and part of the Topology (TP) profile and can be used to combine one or more ConnectivityNodes, Terminals and related equipments to a single node.
+
+The Terminals in the TP profiles are created by reference to their originals in the EQ profile. The implementation in JSON-LD is based on the concept of a Curie (reference). The mrid of the terminal is reused and points to the original terminal in the EQ profile. Based on this a TopologicalNode is then a bridge over multiple points (equipments) in the connectivity and therefore it can reduce complexity in the model and support different use cases when multiple TopologicalNode are used.
+
+.Reduction of complexity with a topologicalNode
+image::image-2026-07-22-18-32-39-241.jpg[]
+
+== Background
+For more information see:
+
+* xref::busbarsection.adoc[BusbarSection] for a detailed description of the {tc57}/BusbarSection.html[cim:BusbarSection] class.
+
+* IEC CIM documentation (https://www.nen.nl/nen-en-iec-61970-301-2020-en-274877[IEC 61970-301: Common Information Model (CIM) Base])
+
+* and the following https://www.ofgem.gov.uk/sites/default/files/2023-08/FoS%20Annex%202%20-%20LTDS%20Grid%20Modelling%20Guidelines1692977149555.pdf[ofgem] document.

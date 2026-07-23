@@ -6,6 +6,7 @@
 *** xref::basevoltage.adoc[]
 *** xref::busbarsection.adoc[]
 *** xref::busbarconfiguration.adoc[]
+*** xref::energyconsumer.adoc[]
 *** xref::powertransformer.adoc[]
 ** Geographical Location
 *** xref::coordinatesystem.adoc[]

@@ -1,0 +1,21 @@
+[d2,svg]
+----
+include::partial$diagrams/cim_legend.d2[]
+
+direction: right
+
+Aggregated demand: {
+  shape: CLOUD
+}
+
+EnergyConsumer: |md
+  # EnergyConsumer
+  cim:equipment.aggregate=true
+|
+EnergyConsumer.shape: rectangle
+EnergyConsumer.class: grid
+
+Aggregated demand -> EnergyConsumer
+
+----
+
