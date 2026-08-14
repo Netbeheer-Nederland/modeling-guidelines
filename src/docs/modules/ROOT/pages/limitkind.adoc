@@ -1,0 +1,36 @@
+= LimitKind
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** LimitKind **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)] and the ENTSO-E profiles.
+
+See https://modellen.netbeheernederland.nl/cgmes/Core%20Equipment/LimitKind/[eu.OperationalLimitType.kind] and https://modellen.netbeheernederland.nl/cgmes/Core%20Equipment/OperationalLimitType/[OperationalLimitType]
+
+== Definition
+
+Within the context of ENTSO-E and the CGMES standard, the difference between PATL, PATLT and TATL lies in how the limit is operationally applied and defined
+
+=== PATL (Permanent Admissible Transmission Loading)
+This is the absolute physical, thermal limit of a network component (such as an overhead line or a transformer). It represents the maximum continuous thermal or electrical loading (current or power) that the asset (such as a transmission line or transformer) can sustain indefinitely under normal, steady-state conditions without getting damaged.
+
+System State Usage:It is primarily applied during preventive security assessments and base case (normal, pre-contingency) load flow analyses to ensure the grid operates within safe, continuous boundaries.
+
+=== PATLT (Permanent Admissible Transmission Loading Threshold)
+This is the operational threshold derived from or defined for the PATL. It is the specific value (expressed in engineering units like MW or Amperes) used by grid operators in calculations and monitoring systems as the actual limit for permanent loading.
+
+=== Summary in Practice
+The PATL is the theoretical/physical limit value of the asset, whereas the PATLT is the configured threshold type (LimitKind or LimitTypeKind) that calculation engines (like load-flow and contingency analyses) use to check if the network is operating safely.
+
+== Modelling choices
+
+* PATL (Permanent Admissible Transmission Limit): Continuous, normal operation.
+* PATLT (Permanent Admissible Transmission Loading Threshold): Operational Threshold.
+* TATL (Temporary Admissible Transmission Limit): Short-duration overload allowed post-contingency.
+* TC (Transient Current): Very short-term high-impact threshold.
+

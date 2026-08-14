@@ -1,0 +1,36 @@
+= Flow Direction
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** flow direction  **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+== Core entities
+To support a flow direction the OperationalLimitSet is associated with a Terminal of a piece of Equipment. In combination with the attribute extension https://modellen.netbeheernederland.nl/nbnl-equipment/upcoming/schema/class/OperationalLimit.html#positiveFlowIn[nl:PositiveFlowIn] in the OperationalLimit object, the direction of the (power) flow is defined. This means that all the operational limits defined in the OperationalLimitSet apply to the power flow through that terminal.
+
+By applying the flow direction (true or false), the value of the operational limit is always positive, regardless of the direction of the flow. Thus, feed-in or consumption is determined by the flow direction, the equipment terminal used, and the PositiveFlowIn attribute. This is important in situations where, for example due to policy, the limit is not identical in both directions of the conducting equipment.
+
+== Definition
+*Definition: positiveFlowIn*
+
+_If true then the measurement is an active power, reactive power or current with the convention that a positive value measured at the Terminal means power is flowing into the related PowerSystemResource._
+
+
+== Modelling choices
+
+.flow direction
+image::image-2026-08-06-17-43-44-085.png[alt="flow direction"]
+
+Some examples:
+
+- When the operational limit is organised on *T1*, based on the fact that the flow direction is "*true*", a *positive* limit value describes an operational Limit based on *consumption*. The limit applies to the power flowing into the equipment.
+- When the operational limit is organised on *T2*, based on the fact that the flow direction is "*true*", a *positive* limit value describes an operational limit based on *feed-in*. The limit applies to the power flowing into the equipment.
+- When the operational limit is organised on *T2*, based on the fact that the flow direction is "*false*", a *positive* limit value describes an operational limit based on *consumption*. The limit applies to the power flowing out of the equipment.
+
+*The terminal of the equipment, in combination with the True of False value of the attribute extension nl:PositiveFlowIn and a positive limit value define the direction of the flow.*
+
+Recommended is not to use a negative value for the limit, but to use the flow direction and a positive value for the limit.

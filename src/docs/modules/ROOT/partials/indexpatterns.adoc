@@ -6,5 +6,6 @@
 ** xref::location.adoc[]
 ** xref::measurement.adoc[]
 ** xref::metadata.adoc[]
+** xref::operationallimit.adoc[]
 ** xref::topology.adoc[]
 

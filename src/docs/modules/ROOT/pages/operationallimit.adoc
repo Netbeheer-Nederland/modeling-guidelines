@@ -1,0 +1,121 @@
+= Operational Limit
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+This document is part of the grid modelling approach and details the grid model data requirements for data supplied by Dutch transmission and distribution system operators and describes in detail the ** Operational Limit **.
+
+Most of the terms in this document are used within the energy industry, particularly in standards like the xref::background.adoc#_common_information_model[IEC Common Information Model (CIM)].
+
+The Operational Limits are used to define the voltage, current and power limits (maximum or minimum) that can flow through a piece of equipment. For example, the active power limit is used to define the maximum active power of an equipment.
+
+The total allowable power (the technical limit) of a device is based on the voltage, current, and permissible temperature development. Normally, the direction of current is irrelevant to the power limit; the limit is the same in both directions (xref::limitkind.adoc[PATL - Permanent Admissible Transmission Loading]).
+
+However, due to guidelines, policy frameworks, contractual agreements, etc., the permitted capacity for, for example, feed-in may be higher than the consumption by the device. In these cases, as a result of policy measures, the device has more than one limit (xref::limitkind.adoc[PATLT - Permanent Admissible Transmission Loading Threshold]). This requires a clear method for defining a direction.
+
+Often, the limits are determined based on the normal state (the situation in which the grid is calculated), but in situations (usage scenarios) where the direction of the current is relevant, the direction of the current through a device can change as a result of, for example, a switching action. And with that, the direction/potential of the limit also changes.
+
+_*) note: The OperationalLimitType.kind (PATL,PATLT, etc) are *not* part of the NBNL EQ profile, the assumption for now is that the PATLT the default is._
+
+One of the use cases for the {tc57}/OperationalLimit.html[cim:OperationalLimit] is in the https://capaciteitskaart.netbeheernederland.nl[capaciteitskaart] where it is used to define the Aanwezige TransportCapaciteit https://begrippen.netbeheernederland.nl/doc/2whwi[(ATC)].
+
+== Core entities
+=== Types of Operational Limits
+Basically there are four types of operational limits defined and depending on the requirements of the specific application can be defined in terms of:
+
+* {tc57}/ActivePowerLimit.html[cim:ActivePowerLimit]
+* {tc57}/ApparentPowerLimit.html[cim:ApparentPowerLimit]
+* {tc57}/CurrentLimit.html[cim:CurrentLimit]
+* {tc57}/VoltageLimit.html[cim:VoltageLimit]
+
+The Limit is associated with an OperationalLimitSet and has a flow direction defined by the attribute PositiveFlowIn.
+
+==== Operational Limit structures
+There are two structures for operational limits: the OperationalLimitSet and the OperationalLimitType (*). The {tc57}/OperationalLimitSet.html[cim:OperationalLimitSet] is used to group together different types of operational limits that apply to a specific piece of equipment, while the {tc57}/OperationalLimitType.html[cim:OperationalLimitType] is used to define the specific properties of a limittype (e.g., duration, kind (patl, patlt) and directionkind (abs, low, high)) that applies to the equipment.
+
+_*) note: OperationalLimitType is not (yet) part of the NBNL EQ profile._
+
+////
+#=== Operational Limit Type#
+cim:OperationalLimitType objects is included to support the typing of Conducting Equipment (like the powertransformer)  Limit objects. The following types could be used:
+
+* 'PATL High' limits
+* ‘PATLT High’ limits
+
+Each of these two cim:OperationalLimitType objects have the following attribute values:
+
+* cim:OperationalLimitType.direction=high
+* cim:OperationalLimitType.isInfiniteDuration=true
+* eu:OperationalLimitType.kind=[patlt, patl]
+
+because the direction of the flow is based on the "nl:OperationalLimit.positiveFlowIn", there is no need to administer this in the name of the OperationalLimitType object.
+////
+
+==== OperationalLimitSet
+The OperationalLimitSet object is used to group together different types of operational limits.
+Sets of limits:
+
+* might apply to a specific temperature, location, or season for example.
+* may contain different severities of limit levels that would apply to the same equipment.
+* may contain limits of different types such as apparent power and current limits or high and low voltage limits  that are logically applied together as a set.
+
+The {tc57}/OperationalLimitSet.html[cim:OperationalLimitSet] is associated with a {tc57}/Terminal.html[cim:Terminal] of a for example {tc57}/PowerTransformerEnd.html[cim:PowerTransformerEnd]. Which means that the operational limits defined in the OperationalLimitSet apply to the (power) flow through the terminal and equipment combination.
+
+.ATC
+image::image-2026-08-07-11-57-22-646.png[]
+
+=== Flow Direction
+To support a flow direction the OperationalLimitSet is associated with a Terminal of a piece of Equipment. In combination with the attribute extension https://modellen.netbeheernederland.nl/nbnl-equipment/upcoming/schema/class/OperationalLimit.html#positiveFlowIn[nl:PositiveFlowIn] in the OperationalLimit object, the direction of the (power) flow is defined. This means that all the operational limits defined in the OperationalLimitSet apply to the power flow through that terminal.
+
+In cim the flow direction for the Operational Limit is not explicit added, bij extending it and adding the standard approach (positiveFlowIn) to the OperationalLimit we do support flow direction in the NBNL EQ profile.
+see also the xref::flowdirection.adoc[] page.
+
+== Modelling choices
+=== Transformer Limit
+In CIM, an Equipment Powerlimit is modelled by a combination of a cim:OperationalLimitSet object and one or more cim:ApparentPowerLimit or cim:ActivePowerLimit objects.
+// each of which is associated with a cim:OperationalLimitType.
+The cim:OperationalLimitSet is associated with a cim:Terminal of a cim:PowerTransformerEnd.
+
+Every cim:PowerTransformer has a cim:OperationalLimitSet object associated with the cim:Terminal of the secondairy and where applicable, the tertiary winding (i.e., the winding with cim:TransformerEnd.endNumber=2 or 3).
+
+For 3-winding transformers, two cim:OperationalLimitSet objects are needed, also associated with the cim:Terminal of each winding (i.e., the windings with cim:TransformerEnd.endNumber=2 and cim:TransformerEnd.endNumber=3).
+
+if the limit for the reverse power flow is different a PowerTransformer has an additional OperationalLimitSet, which represents the operating limit for the reverse direction of flow.
+
+Each OperationalLimit object whose Value attribute is populated with a value reflecting the MVA or MW limit for the power flow in the normal direction that is typically used in planning and interconnection studies of the System Operator.
+The Value incorporates the technical and required policy limits of the System Operator (see also the PATLT (Permanent Admissible Transmission Loading Threshold) definition in the xref::limitkind.adoc[LimitKind])
+
+== Circuit/Feeder/Line Limit
+In CIM, a limit on a {tc57}/Line.html[cim:Line] (verbinding) or a {tc57}/Feeder.html[cim:Feeder] (ms-route) is modelled by a combination of a cim:OperationalLimitSet object and one or more Current, Power or Voltage Limit objects. The cim:OperationalLimitSet is associated with a cim:Terminal of a cim:ACLineSegment (or any other cim:ConductingEquipment subtype object associated with a Line or Feeder).
+
+Definitions:
+
+* a {tc57}/Circuit.html[cim:Circuit] is a combination of one or more overhead lines between 2 substations for the transmission of energie.
+* a {tc57}/Feeder.html[cim:Feeder] is a combination of one of more ACLineSegments (cables in series) between a feeding substation and one or more distribution substation or between a distribution substation and one or more end users for the distribution of energie
+
+Every cim:ACLineSegment has at least one cim:OperationalLimitSet object associated with one of its two cim:Terminal objects and can have as many as necessary to accurately reflect the System Operators limit philosophies.
+
+Each cim:OperationalLimitSet associated with a cim:ACLineSegment’s cim:Terminal is associated with a Limit object whose Value attribute is populated with a value reflecting the conductor limit typically used in planning and interconnection studies of the System Operator (PATLT). See the xref::limitkind.adoc[LimitKind]
+
+If a device, other than an aclinesegment, is a limiting element on a circuit or feeder, the cim:Equipment subtype object representing the device is associated with the circuit’s cim:Line (via either a cim:Equipment.EquipmentContainer association or via a cim:Equipment.AdditionalEquipmentContainer association) and can have one or more cim:OperationalLimitSet objects associated with one of its cim:Terminal objects.
+
+=== Redundancy Constraints (e.g., n-1)
+Redundancy is an important aspect of grid and therefore there is a need to define operational limits for a group of equipments. The operational limits can be defined for a single piece of equipment, such as a transformer, or for a set of equipment, such as a group of transformers. When set for a group of equipments it can be used to define redundancy, like n-1 configurations. The operational limit is used to define an N-1 constraint.
+
+.ATC based on Redundancy
+image::image-2026-08-07-11-58-03-933.png[]
+
+When there is a need to define a constraint based on a grouping of equipment for example in case of redundancy (n-1) then
+the OperationalLimit has an association available with the https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/ActivePowerLimit.html#LimitDependencyModel[cim:ActivePowerLimit.LimitDependencyModel].
+
+The SeriesEquipmentDependentLimit can be used to define redundancy, like n-1 configurations, as a constraint. It can also been used to represent the operational limit of a set of equipment in series (for example a cable (feeder, circuit) based of several ACLineSegments).
+
+Each equipment is added with its terminal (for indicating the flowdirection) to the https://modellen.netbeheernederland.nl/tc57cim/cim17/schema/class/EquipmentLimitSeriesComponent.html[cim:EquipmentLimitSeriesComponent] and associated with the same SeriesEquipmentDependentLimit.
+
+== Note
+
+* In the ofgem LTDS profiles there is also an extension with 2 attributes (validFrom and validTo) which defines the validity period of the operational limit set. It can be used for example for defining summer and winter. This is not implemented in the NBNL EQ profile.
+
+See also https://www.ofgem.gov.uk/sites/default/files/2023-07/LTDS%20Data%20Exchange%20Specifications.pdf[LTDS Data Exchange Specifications]

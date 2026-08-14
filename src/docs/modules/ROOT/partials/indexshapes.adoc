@@ -7,11 +7,13 @@
 *** xref::busbarsection.adoc[]
 *** xref::busbarconfiguration.adoc[]
 *** xref::energyconsumer.adoc[]
+*** xref::flowdirection.adoc[]
 *** xref::powertransformer.adoc[]
 ** Geographical Location
 *** xref::coordinatesystem.adoc[]
 ** Operation
 *** xref::measurementtype.adoc[]
 ** Topology
-
+** Enumerations
+*** xref::limitkind.adoc[]
 
