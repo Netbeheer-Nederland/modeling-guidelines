@@ -1,4 +1,5 @@
 = Using Controlled Vocabularies in Enumerations
+
 A **controlled vocabulary** is a set of terms owned and maintained by an authority. Their goal is to represent knowledge in natural language organized in a simple structure for humans to be used. Typically, controlled vocabularies are rich in semantics, which may include labels, definitions, titles, notes of all kinds, etc., but also governance-related metadata. Controlled vocabularies are a business product.
 
 By organizing terms from a domain in controlled vocabularies, language used or agreed upon can be made explicit and referenced. It is a means of enforcing -- or at the very least, stimulating -- a common language to be used. When a globally unique and persistent (FAIR F1) identifier is assigned to terms, they can also be unambiguously referenced in databases, software applications and datasets.
