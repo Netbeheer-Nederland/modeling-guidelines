@@ -9,6 +9,8 @@
 *** xref::energyconsumer.adoc[]
 *** xref::flowdirection.adoc[]
 *** xref::powertransformer.adoc[]
+*** Substation
+**** xref::cabinet.adoc[]
 ** Geographical Location
 *** xref::coordinatesystem.adoc[]
 ** Operation

@@ -1,0 +1,43 @@
+= Low-Voltage Distribution Cabinet
+include::partial$include.adoc[]
+:author: Arend Hagreis
+:email: ahagreis@netbeheernederland.nl
+include::partial$header.adoc[]
+
+== Introduction
+In the *Common Information Model (CIM)* (IEC 61970/61968), a low-voltage street distribution cabinet (also known as a feeder pillar, distribution board, or _wijkkast_ in Dutch) is not modelled as a single object. Instead, it is modelled as a *combination of logical and physical components* within the link:https://modellen.netbeheernederland.nl/data-products/information-models/nbnl-profile-group[Equipment and Topology profiles.]
+
+The exact modelling approach depends on the required level of abstraction (e.g., for power flow analysis or asset management). Below is the standard method for structuring a distribution cabinet functionally and topologically.
+
+== The Base Structure of the Cabinet
+* *{tc57}/Substation.html[cim:Substation] or {tc57}/Bay.html[cim:Bay] (Container):* Although a street cabinet is physically not a large high-voltage substation, CIM uses the Substation class and the specific distribution containers like Bay as the organisational container. This ensures all internal components are logically grouped together.
+* *{tc57}/EquipmentContainer.html[cim:EquipmentContainer]:* This is the abstract class from which Substation and Bay inherits. The container is used to specify that the busbars and fuses are physically located *inside* the cabinet.
+
+== Modelling Internal Components
+Inside the container, you model the physical electrical components that transport and protect the power:
+
+* *{tc57}/BusbarSection.html[cim:BusbarSection] (The Busbar):* The internal copper bars (usually a 3-phase busbar system) where the incoming feeder cable enters and the outgoing lines to the consumers connect.
+* *{tc57}/Fuse.html[cim:Fuse] or {tc57}/Switch.html[cim:Switch] (Protection/Switching):* Every outgoing cable (and often the incoming supply) is protected by fuses. In CIM, you model this using the {tc57}/Fuse.html[cim:Fuse] class. If a main switch is present, you use  {tc57}/Disconnector.html[cim:Disconnector] or {tc57}/LoadBreakSwitch.html[cim:LoadBreakSwitch].
+* *{tc57}/ACLineSegment.html[cim:ACLineSegment] (Cables):* The incoming underground cable from the transformer station (MV/LV) and the outgoing low-voltage cables to the end-users ({tc57}/EnergyConsumer.html[cim:EnergyConsumer]) connect directly to the cabinet's components.
+
+== (Topological) Connectivity
+To enable network calculation software (such as for load flow analysis) to understand the power flow, you connect the components using the CIM node-breaker or bus-branch model:
+
+1. *{tc57}/ConnectivityNode.html[cim:ConnectivityNode]:* These are the logical nodes. You need at least one ConnectivityNode for the BusbarSection itself, and separate nodes before and after each Fuse.
+2. *{tc57}/Terminal.html[cim:Terminal]:* Every physical device ({tc57}/BusbarSection.html[cim:BusbarSection], {tc57}/Fuse.html[cim:Fuse], {tc57}/ACLineSegment.html[cim:ACLineSegment]) has one or more Terminal objects. You link these terminals to the correct ConnectivityNode.
+
+== Logical Power Flow Structure
+In most cases a cabinet has a single incoming feeder cable (from the transformer station) and multiple Bays and outgoing cables  to the end-users. The diagram above shows the logical connectivity of the components inside the cabinet.
+
+image::image-2026-10-07-16-42-55-753.jpg[Cabinet]
+
+== Asset Data & Location
+If your model is also used for asset management (GIS / ERP systems), you can add the following classes:
+
+* *{tc57}/Asset.html[cim:Asset]:* Links physical attributes (brand, type, manufacturing year, maintenance status) to the logical CIM electrical components.
+* *{tc57}/Location.html[cim:Location] and {tc57}/PositionPoint.html[cim:PositionPoint]:* Used to store the exact geographical GPS coordinates of the street cabinet.
+
+== Background
+For more information see:
+
+* xref::containment.adoc[Containment] for a detailed description of the containment of equipment in a  {tc57}/Substation.html[cim:Substation] class.
