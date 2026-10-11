@@ -27,6 +27,7 @@ system operator specific dataset must be validated together.
 Each dataset requires metadata to keep track of issuer, issuance date, schema
 and dependencies.
 
+.Example metadata in JSON-LD
 [source,json]
 ----
 "@id": "urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc", <1>
@@ -58,6 +59,42 @@ The following information is required:
 4. schema to validate the dataset against. Verify usage of the correct version;
 5. any datasets this dataset is dependant on. For any non-boundary datasets,
 this is the _@id_ of the boundary dataset referred to.
+
+=== Automatic validation
+
+Dataset metadata can be validated automatically using the
+xref::attachment$dataset-metadata.shacl.jsonld[Dataset Metadata SHACL].
+
+Make sure you target the default graph of the JSON-LD dataset which is where
+the metadata lives or you will get false positive results.
+
+[%collapsible]
+.Example: Validating dataset metadata using PySHACL
+====
+
+Let's use the xref::attachment$dataset-metadata.shacl.jsonld[Dataset Metadata SHACL] to validate the [https://modellen.netbeheernederland.nl/nbnl-equipment/3.0/schema/_attachments/examples/jsonld/mv.example.jsonld[NBNL Equipment Profile 3.0 MV Example Dataset].
+
+[source,python]
+....
+from rdflib import Dataset, Graph
+from pyshacl import validate
+
+dataset = Dataset()
+dataset.parse("https://modellen.netbeheernederland.nl/nbnl-equipment/3.0/schema/_attachments/examples/jsonld/mv.example.jsonld", format="json-ld")
+
+shapes_graph = Graph()
+shapes_graph.parse("https://modellen.netbeheernederland.nl/modelling-guidelines/_attachments/dataset-metadata.shacl.jsonld", format="json-ld")
+
+conforms, results_graph, results_text = validate(dataset.default_graph,
+                                                 shacl_graph=shapes_graph)
+....
+====
+
+.For modellers
+[CAUTION]
+Modellers might be tempted to import the _Dataset Metadata SHACL_ in the SHACL
+data model their building. This will not work though, because data and its
+metadata live in different graphs.
 
 == TSO High Voltage (Boundary) Dataset
 

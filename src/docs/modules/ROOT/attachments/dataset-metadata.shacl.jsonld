@@ -1,0 +1,133 @@
+{
+  "@context": {
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "adms": "http://www.w3.org/ns/adms#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "@vocab": "http://www.w3.org/ns/shacl#",
+    "description": {
+      "@id": "dcterms:description",
+      "@container": "@language"
+    },
+    "imports": {
+      "@id": "owl:imports",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "dcterms:title",
+      "@container": "@language"
+    },
+    "publisher": {
+      "@id": "dcterms:publisher"
+    },
+    "property": {
+      "@container": "@index",
+      "@index": "path",
+      "@context": {
+        "name": {
+          "@id": "sh:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "sh:description",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "in": {
+      "@container": "@list",
+      "@type": "@id"
+    },
+    "or": {
+      "@container": "@list",
+      "@type": "@id"
+    },
+    "node": {
+      "@type": "@id"
+    },
+    "nodeKind": {
+      "@type": "@id"
+    },
+    "datatype": {
+      "@type": "@id"
+    },
+    "path": {
+      "@type": "@id"
+    },
+    "closed": {
+      "@type": "xsd:boolean"
+    },
+    "classes": {
+      "@id": "dcterms:hasPart",
+      "@container": "@id"
+    },
+    "enums": {
+      "@id": "dcterms:hasPart",
+      "@container": "@id"
+    }
+  },
+  "@id": "https://modellen.netbeheernederland.nl/nbnl-profile-group/3.1/dataset-metadata",
+  "@type": [
+    "dcat:Dataset",
+    "adms:Asset",
+    "sh:ShapesGraph",
+    "owl:Ontology"
+  ],
+  "imports": [
+    "https://modellen.netbeheernederland.nl/begrippenlijsten/netbeheerder.shacl.ttl"
+  ],
+  "classes": {
+    "dcat:Dataset": {
+      "@type": [
+        "rdfs:Class",
+        "sh:NodeShape"
+      ],
+      "property": {
+        "dcterms:title": {
+          "name": "title",
+          "maxCount": 1,
+          "or": [
+            {
+              "datatype": "rdf:langString"
+            },
+            {
+              "datatype": "xsd:string"
+            }
+          ]
+        },
+        "dcterms:issued": {
+          "name": "issued",
+          "minCount": 1,
+          "datatype": "xsd:dateTime"
+        },
+        "dcterms:publisher": {
+          "name": "publisher",
+          "maxCount": 0,
+          "node": "https://modellen.netbeheernederland.nl/begrippenlijsten/netbeheerder#netbeheerderShape"
+        },
+        "dcterms:references": {
+          "name": "references",
+          "or": [
+            {
+              "datatype": "xsd:anyURI"
+            },
+            {
+              "nodeKind": "sh:BlankNodeOrIRI"
+            }
+          ]
+        }
+      }
+    },
+    "cim:Substation": {
+      "property": {
+        "cim.IdentifiedObject.mRID": {
+          "maxCount": 0
+        }
+      }
+    }
+  }
+}
