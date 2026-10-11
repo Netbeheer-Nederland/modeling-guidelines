@@ -3,3 +3,6 @@
 .idea/
 /output/
 *.bkp
+/sandbox/
+/package-lock.json
+/antora.*.playbook.y*ml
