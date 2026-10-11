@@ -2,4 +2,3 @@
 ** xref::building-dso-mv.adoc[]
 ** xref::building-contingency.adoc[]
 ** xref::building-operational-limit.adoc[]
-** xref::building_the_datasets.adoc[]
