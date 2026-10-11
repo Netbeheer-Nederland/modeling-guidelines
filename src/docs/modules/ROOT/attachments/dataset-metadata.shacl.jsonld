@@ -61,13 +61,10 @@
     "closed": {
       "@type": "xsd:boolean"
     },
-    "classes": {
+    "shapes": {
       "@id": "dcterms:hasPart",
-      "@container": "@id"
-    },
-    "enums": {
-      "@id": "dcterms:hasPart",
-      "@container": "@id"
+      "@container": "@index",
+      "@index": "targetObjectsOf"
     }
   },
   "@id": "https://modellen.netbeheernederland.nl/nbnl-profile-group/3.1/dataset-metadata",
@@ -78,56 +75,41 @@
     "owl:Ontology"
   ],
   "imports": [
-    "https://modellen.netbeheernederland.nl/begrippenlijsten/netbeheerder.shacl.ttl"
+    "https://modellen.netbeheernederland.nl/begrippenlijsten/marktpartijen.shacl.ttl"
   ],
-  "classes": {
-    "dcat:Dataset": {
-      "@type": [
-        "rdfs:Class",
-        "sh:NodeShape"
-      ],
-      "property": {
-        "dcterms:title": {
-          "name": "title",
-          "maxCount": 1,
-          "or": [
-            {
-              "datatype": "rdf:langString"
-            },
-            {
-              "datatype": "xsd:string"
-            }
-          ]
+  "shapes": {
+    "dcterms:title": {
+      "name": "title",
+      "maxCount": 1,
+      "or": [
+        {
+          "datatype": "rdf:langString"
         },
-        "dcterms:issued": {
-          "name": "issued",
-          "minCount": 1,
-          "datatype": "xsd:dateTime"
-        },
-        "dcterms:publisher": {
-          "name": "publisher",
-          "maxCount": 0,
-          "node": "https://modellen.netbeheernederland.nl/begrippenlijsten/netbeheerder#netbeheerderShape"
-        },
-        "dcterms:references": {
-          "name": "references",
-          "or": [
-            {
-              "datatype": "xsd:anyURI"
-            },
-            {
-              "nodeKind": "sh:BlankNodeOrIRI"
-            }
-          ]
+        {
+          "datatype": "xsd:string"
         }
-      }
+      ]
     },
-    "cim:Substation": {
-      "property": {
-        "cim.IdentifiedObject.mRID": {
-          "maxCount": 0
+    "dcterms:issued": {
+      "name": "issued",
+      "minCount": 1,
+      "datatype": "xsd:dateTime"
+    },
+    "dcterms:publisher": {
+      "name": "publisher",
+      "maxCount": 0,
+      "node": "https://modellen.netbeheernederland.nl/begrippenlijsten/netbeheerder#netbeheerderShape"
+    },
+    "dcterms:references": {
+      "name": "references",
+      "or": [
+        {
+          "datatype": "xsd:anyURI"
+        },
+        {
+          "nodeKind": "sh:BlankNodeOrIRI"
         }
-      }
+      ]
     }
   }
 }
